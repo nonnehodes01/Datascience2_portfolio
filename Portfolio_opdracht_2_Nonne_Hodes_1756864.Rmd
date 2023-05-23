@@ -1,0 +1,21 @@
+---
+title: "Formatieve opdracht 2"
+author: "Nonne Hodes"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r librarys, message=FALSE, echo=FALSE}
+```
+
+
+__opdracht 2:__ 
+_Het Guerrilla-analyseraamwerk toepassen_
+```{r formatieve opdracht les 2}
+
+```

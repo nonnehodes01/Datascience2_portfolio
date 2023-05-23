@@ -1,0 +1,19 @@
+---
+title: "Formatieve opdracht 9"
+author: "Nonne Hodes"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r librarys, message=FALSE, echo=FALSE}
+```
+
+__opdracht 9:__
+_Een geparametriseerd rapport voor de COVID-19-gevallen_
+```{r formatieve opdracht les 9}
+
+```

@@ -1,0 +1,63 @@
+---
+name: Nonne
+surname: Hodes
+position: "Student"
+address: "Hogeschool Utrecht | Biologie en medisch laboratorium onderzoek (life sciences)"
+pronouns: she/her
+profilepic: foto_nonne.jpg
+email: "Nonne.hodes@student.hu.nl"
+github: nonnnehodes01
+linkedin: Nonne Hodes
+date: "`r format(Sys.time(), '%B %Y')`"
+output: vitae::twentyseconds
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
+```
+
+# Some stuff about me
+
+Ik ben een gedreven (bijna) professional in de life sciences, ik heb sterke analytische vaardigheden, ben resultaatgericht en heb een hoog probleemoplossend vermogen. Ook ben ik een proactieve teamspeler met sterke communicatievaardigheden. Ik ben gepassioneerd door Floorball (innebandy/unihockey), deze passie geeft mij energie en zorgt ervoor dat ik altijd op zoek ben naar nieuwe kansen en mogelijkheden om mezelf uit te dagen en te groeien
+
+
+# Education
+
+```{r education}
+library(tibble)
+tribble(
+  ~ Degree, ~ Year, ~ Institution, ~ Where,
+  "HAVO", "2013-2019", "UniC Utrecht", "Utrecht, Nederland",
+  "HBO-ICT", "2019-2020", "Hogeschool Utrecht", "Utrecht, Nederland",
+  "Biologie en medisch laboratoriumonderzoek", "2020-heden", "Hogeschool Utrecht", "Utrecht, Nederland",
+) %>% 
+  detailed_entries(Degree, Year, Institution, Where)
+```
+
+
+# Work experience 
+
+```{r work_experience}
+library(tibble)
+tribble(
+  ~ functie, ~ Year, ~ workspace, ~ Where,
+  " Medewerker", "2019 jun-aug", "FLeiR Apotheek Parkwijk B.V.", "Utrecht, Nederland",
+  " Medewerker", "2021 jul-aug", "FLeiR Apotheek Parkwijk B.V.", "Utrecht, Nederland",
+) %>% 
+  detailed_entries(functie, Year, workspace, Where)
+```
+
+
+# Volunteer work
+
+```{r volunteer_work}
+library(tibble)
+tribble(
+  ~ functie, ~ Year, ~ workspace, ~ Where,
+  " Assistent", "2018 jul-dec", "Autisme centrum in contact", "Hilversum, Nederland",
+) %>% 
+  detailed_entries(functie, Year, workspace, Where)
+```
+
+

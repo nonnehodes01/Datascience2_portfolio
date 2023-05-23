@@ -1,0 +1,24 @@
+---
+title: "Portfolio opdracht 1.2"
+author: "Nonne Hodes"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+__Open collegiale toetsing__
+
+Artikel: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5556618/
+
+Doel van de studie: Ja
+Verklaring gegevensbeschikbaarheid: Ja
+Gegevens locatie: Ja, onder Data Records
+Study location: Ja, in zweden, te vinden onder Acknowledgments
+Author review: niet aanwezig 
+Ethische uitspraak: Nee
+Financieringsverklaring: Ja
+Code Beschikbaarheid: Nee
+ 
