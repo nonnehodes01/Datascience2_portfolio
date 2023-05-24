@@ -11,3 +11,6 @@ Encoding: UTF-8
 
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
+
+BuildType: Website
+WebsitePath: C:/Users/nonne/Documents/HU_ILC_DS2/Datascience2_portfolio/Portfolio
