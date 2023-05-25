@@ -4,7 +4,10 @@ author: "Nonne Hodes"
 site: bookdown::bookdown_site
 documentclass: book
 output:
-  bookdown::gitbook: default
-  #bookdown::pdf_book: default
+  bookdown::gitbook:
+    number_sections: no
 ---
 
+# Portfolio
+__Nonne Hodes__
+_Hogeschool Utrecht_

@@ -1,5 +1,5 @@
 
-# Portfolio opdracht 1 deel 1
+# Opdracht 1 deel 1
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

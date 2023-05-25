@@ -1,14 +1,7 @@
-# Portfolio opdracht 2
+# Opdracht 2
 
 ```{r setup2, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-__Het Guerrilla-analyseraamwerk toepassen__
-
-
-```{r, fig.cap="Figuur 1: Directory tree na het opruimen van de Daur2 map", echo=FALSE, out.width='300px'}
-
-knitr::include_graphics("~/HU_ILC_DS2/Datascience2_portfolio/portfolio_opdracht_2/dir_tree.png")
-
-```
+<iframe src="dir_tree.pdf" width="100%" height="800px"></iframe>
