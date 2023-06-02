@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | _main.knit</title>
+  <title>Opdracht 8: Een R package bouwen | _main.knit</title>
   <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | _main.knit" />
+  <meta property="og:title" content="Opdracht 8: Een R package bouwen | _main.knit" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | _main.knit" />
+  <meta name="twitter:title" content="Opdracht 8: Een R package bouwen | _main.knit" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="opdracht-7-relationele-data-en-databases.html"/>
+<link rel="next" href="opdracht-9-rmarkdown-parameters-presentations.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -172,19 +172,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="opdracht-8-een-r-package-bouwen" class="section level1 hasAnchor">
+<h1>Opdracht 8: Een R package bouwen<a href="opdracht-8-een-r-package-bouwen.html#opdracht-8-een-r-package-bouwen" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Deze portfolio-opdracht richt zich op het creëren van een R-pakket met behulp van RMarkdown-bestanden. Het doel is om duplicatie van code aan te pakken door functies te schrijven en deze code naar een nieuw R-pakket te verplaatsen. Daarnaast moet het pakket een correct opgemaakt DESCRIPTION-bestand, functies met de juiste documentatie, een NAMESPACE-bestand, een opgeschoonde dataset en een vignet bevatten.</p>
+<p>In dit project heb ik het R-pakket “makeLifeEasy” gecreëerd, dat verschillende handige functies bevat om taken te vereenvoudigen en codeherhaling te verminderen. de schone data en code is te vinden in de github repository <a href="https://github.com/nonnehodes01/makeLifeEasy.git">makeLifeEasy</a>. De volledige code (niet opgeschoond en met losse functies) is te vinden in de github repository <a href="https://github.com/nonnehodes01/Datascience2_portfolio/tree/main/portfolio_opdracht_8">Dataschience2_portfolio - portfolio_opdracht_8</a> Het pakket is ontworpen om het gemakkelijker te maken om gegevens te verwerken, analyses uit te voeren en visuele resultaten te genereren.</p>
+<p>Hoewel het eigenlijk de bedoeling was om stukken gedupliceerde code hierin te verwerken viel mij al snel op dat ik (waarschijnlijk omdat ik niet niet extreem veel geprogrammeerd heb) niet heel veel gedupliceerde code heb. het enige wat wel opviel was dat de libraries laden en het maken van summaries bijna altijd terug komt, daarom heb ik dit wel in de package verwerkt. voor de overige functies heb ik gekozen voor dingen die mij veel hadden kunnen helpen met het extra oefenen voor de vakken ab en daur1. hiervoor heb ik verschillende functies geschreven; een functie geschreven die lijsten kan maken met random woorden, een functie die lijsten kan maken met random getallen en een functie die makkelijk de typing van een kolom in een tibble kan aanpassen. hieronder volgt een kleine uitleg per functie;</p>
+<ul>
+<li><p>Funtie 1: “load_common_libraries()”: Deze functie laadt vaak gebruikte R-pakketten, zoals dplyr en ggplot2, om snel aan de slag te kunnen met gegevensverwerking en visualisatie.</p></li>
+<li><p>Functie 2: “generate_random_numbers()”: Deze functie genereert een willekeurig getal binnen een opgegeven bereik. Het is handig bij het simuleren van gegevens of het maken van willekeurige selecties.</p></li>
+<li><p>Functie 3: “generate_random_words()”: Deze functie selecteert willekeurig een woord uit een opgegeven lijst van woorden. Het kan worden gebruikt voor het genereren van testgegevens of het maken van willekeurige tekstfragmenten.</p></li>
+<li><p>Functie 4: “change_column_category()”: Deze functie past de categorie van een opgegeven kolom in een tibble aan naar de opgegeven nieuwe categorie. Het is handig bij het wijzigen van de gegevenstypen van kolommen in een dataset, zoals het omzetten van numerieke waarden naar categorieën.</p></li>
+<li><p>Functie 5: “simple_summary()”: Deze functie biedt een aangepaste samenvatting van een tibble met behulp van opgegeven groepering en kolommen. Het maakt het gemakkelijk om specifieke statistieken te berekenen en overzichten te genereren.</p></li>
+</ul>
+<p>De package is makkelijk te installeren door de volgende code uit te voeren;</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="opdracht-8-een-r-package-bouwen.html#cb1-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;nonnehodes01/makeLifeEasy&quot;</span>)</span></code></pre></div>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="opdracht-7-relationele-data-en-databases.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="opdracht-9-rmarkdown-parameters-presentations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
