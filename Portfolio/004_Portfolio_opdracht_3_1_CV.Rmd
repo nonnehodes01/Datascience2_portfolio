@@ -1,7 +1,11 @@
-# Opdracht 3 deel 1
+# Opdracht 3: Gebruik van Git en Github
+
+## 3.1: CV
 
 Bij deze Portfolio opdracht moest er een CV gemaakt worden, deze is te vinden door op deze
 [link naar de CV](004_Portfolio_opdracht_3_1_CV.pdf) te klikken of door onderaan deze pagina te kijken. De code waarmee de CV gemaakt is, is te vinden door op deze [link naar de Github repository](https://github.com/nonnehodes01/Datascience2_portfolio/tree/main/portfolio_opdracht_3/Portfolio_opdracht_3_1_Nonne_Hodes_1756864) te klikken. 
 
 
 <iframe src="004_Portfolio_opdracht_3_1_CV.pdf" width="100%" height="800px"></iframe>
+
+## 3.1: Een blik in de toekomst

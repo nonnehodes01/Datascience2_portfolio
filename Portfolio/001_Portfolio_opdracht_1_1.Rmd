@@ -1,5 +1,8 @@
 
-# Opdracht 1 deel 1
+# Opdracht 1: Reproduceerbaar onderzoek
+
+## 1.1: C. elegans plaatexperiment
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -11,8 +14,11 @@ library(tidyverse)
 library(DESeq2)
 
 ```
+Deze opdracht heeft als doel om data visueel te maken met get ggplot2 pakket, waarbij een dosis-responsanalyse met een log-logistiek model wordt uitgevoerd. 
 
-__C. elegans plaatexperiment__
+Voor deze opdracht wordt gebruik gemaakt van gegevens die zijn verstrekt door J. Louter (INT/ILC) en afkomstig zijn van een experiment met C. elegans nematoden. 
+
+__Opdrachten:__
 
 a) 
 wat opvalt aan de excel sheet is dat het erg onoverzichtelijk is, onderdelen zijn gelabeld met kleurtjes, maar er is geen legenda waarin wordt aangegeven wat deze kleuren betekenen. De kleuren in het schema zijn erg afleidend en maken het moeilijk om de data te inspecteren. Ook valt op dat er in het de kolom "bubble" steeds de waarde #N/B staat, ook hiervan is nergens aangegeven waar dit voor staat. Er vanuitgaande dathet staat voor "niet berekend" lijkt het ook alsof de data dus niet compleet is/niet goed is afgerond. Als derde valt het op dat er veel data in dit databestand staat die in de metadata terecht hoort. wat voor incubatiebuizen er worden gebruikt, de incubatie unit, de gebruikte rpm, de incubatie themperatuur, etc. Dit is allemaal steeds de zelfde waarde, en hoort daardoor niet in dit bestand terecht. Tot slot valt op dat de raw data in het bestand toegevoegd is, dit is erg gevaarlijk, omdat het kan zijn dat je daar perongeluk en onopgemerkt weizigingen in maakt. De raw data moet altijd los opgeslagen worden en er mag alleen in een kopie hiervan gewerkt worden. 
@@ -127,4 +133,59 @@ ggplot(data = c_elegans_plaatexp_cp_normalised, aes(x = log10conc, y = normalise
 k)
 omdat het normaliseren van de data er voor zorgt dat de schaal van de gegevens wordt gestandaardiseerd, hierdoor is het makkelijker om data met verschillende variabelen te vergelijken en combineren. Ook voorkomt het de invloed van hele grote getallen, we werken met waardes tussen de 0 en 100, dit op een kleineere schaal in beeld brengen is handiger dan op die grootte. 
 
+
+## 1.2: Open science
+
+### Deel 1: Open collegiale toetsing
+
+Deze opracht richt zich op het uitvoeren van een open collegiale toetsing. Een open collegiale toetsing is een proces waarbij wetenschappelijke resultaten worden beoordeeld door vakgenoten, met als doel de kwaliteit, betrouwebaarheid en relevantie van het onderzoek te garanderen. 
+
+In deze opdracht maak ik gebruik van het artikel "Genome-wide expression datasets of anti-VEGF and dexamethasone treatment of angiogenesis in the rat cornea" geschreven door Anthony Mukwaya,  Pierfrancesco Mirabelli, Anton Lennikov, Maria Xeroudaki, Mira Schaupper, Beatrice Peebo en Neil Lagalia. 
+
+Dit artikel onderzoekt de werkzaamheid en resistentie van anti-VEGF-middelen in de oogheelkunde. Ze willen graag een effectievere therapie vinden door genexpressieveranderingen tussen dexamethason en anti-VEGF-behandelingen te vergelijken in het hoornvlies van ratten.
+
+Dit artikel is te vinden via de [website](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5556618/) van ncbi of via de [website](https://www.nature.com/articles/sdata2017111) van nature scientific data. 
+
+ 
+___Toetsing resultaten:___
+
+_Doel van de studie:_ Ja
+
+_Gegevensbeschikbaarheid:_ Ja
+
+_Gegevens Locatie:_ Niet specifiek vermeld, maar wel in tabellen weergeven in de paper.
+
+_Studie Locatie:_ Nee
+
+_Auteur recensie:_ Geen informatie beschikbaar
+
+_Ethische uitspraak:_ Nee
+
+_Financieringsverklaring:_ Ja
+
+_Code Beschikbaarheid:_ Nee
+
+
+### Deel 2: reproduceerbaarheid van artikelen gepubliceerd onder het open databeleid
+
+In deze opdracht wordt de reproduceerbaarheid van een artikel onderzocht dat gepubliceerd is onder het open databeleid. De analyses zulen gerepliceert worden om te controleren hoe repliceerbaar het daadwerkelijk is. 
+
+De data en R code die voor deze opdracht wordt gebruikt is te vinden op [Github](https://github.com/strengejacke/paper-code/tree/master/2020%20-%20ZfGG%20-%20Sedierung) en hoort bij een paper die te vinden is op [Springer link](https://link.springer.com/article/10.1007/s00391-020-01697-3) (gevonden via google scolar)
+
+__Wat wil de code bereiken:__
+
+De code wil uitzoeken of en welke verschillende factoren van invloed zijn op het toedienen van kalmerende medicatie bij mensen met dementiewanneer dit niet nodig is.Dit wordt gedaan door een case-control studie uit te voeren op verschillende afdelingen van de interne geneeskunde in Hamburg, dit is uitgevoerd aan de hand van logische regressies. 
+
+__Hoe makkelijk is de code leesbaar:__
+
+ik zou de leesbaarheid van de code een moeitegraag van 3 geven, het is allemaal net iets anders dan wij aangeleerd hebben en het is in het duits, waardoor het nog net iets meer moeite kost. Wel is het niet heel anders dan wat wij hebben geleerd, dus ik had al snel door hoe alles zat.
+
+__Aanpassingen die ik gedaan heb aan het script:__
+
+- Packages geïnstalleerd 
+- Getransleerd naar nederlands (vanuit duits)
+
+__Hoeveel moeite kostte het om het paper te reproduceren:__
+
+Ik zou de moeitegraad een 1 geven, het enige lastige was het duitse paper lezen en transleren. de data en de code stonden op de zelfde plek en er kon makkelijk naar verwezen worden, ook hoefde ik geen aanpassingen te doen aan de code om grafieken en tabellen te produceren. een voorbeeld van zon tabel is te zien in figuur 1. de code hiervoor is te vinden in figuur 2. 
 
