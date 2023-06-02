@@ -1,0 +1,9 @@
+Package: makeLifeEasy
+Type: Package
+Title: Make Life Easy - A Collection of Useful Functions
+Version: 1.0.0
+Author: Nonne Hodes <nonne.hodes@gmail.com>
+Description: This R package provides a collection of useful functions for simplifying common tasks in data analysis. It includes functions for loading common libraries, generating random numbers and words, changing column categories, and creating custom summaries. The package's goal is to make programming faster and make a data scientist life a bit easier.
+License: MIT
+Encoding: UTF-8
+LazyData: true
