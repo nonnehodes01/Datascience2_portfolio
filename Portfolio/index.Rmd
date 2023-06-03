@@ -4,6 +4,7 @@ documentclass: book
 output:
   bookdown::gitbook:
     number_sections: no
+bibliography: Zotero_bibliography.bib
 ---
 # Portfolio
 ___Auteur:___ Nonne Hodes, 

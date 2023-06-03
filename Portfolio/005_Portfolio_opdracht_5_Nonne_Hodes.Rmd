@@ -1,10 +1,3 @@
----
-output:
-  pdf_document:
-    citation_package: biblatex
-bibliography: "~/HU_ILC_DS2/Datascience2_portfolio/Zotero_bibloigraphy.bib"
----
-
 
 # Opdracht 5: Gebruik van Zotero
 
@@ -15,9 +8,9 @@ __Introductie projecticum "gen expressie"__
 
 Binnen het instituut voor de levenswetenschappen (ILC) kan er sinds kort RNA sequencing gedaan worden met behulp van de MinION sequencer, deze sequencer maakt het mogelijk om de genexpressie van organismen in kaart te brengen. Binnen het ILC (instituut voor de levenswetenschappen) wordt er specifiek gericht op werken met MCF7 cellen, dit is een cellijn die veel wordt gebruikt bij onderzoek naar kanker. In dit projecticum is het doel om de kwaliteit van de, door het ILC gegenereerde, RNA sequencing data te valideren door dit te vergelijken met een al gegenereerde RNA sequencing dataset. 
 
-Omdat de betrouwbaarheid van de ILC data onbekend is zal dit eerst onderzocht moeten worden, dit wordt gedaan door de ILC data te vergelijken met een andere RNA-sequencing dataset. Deze dataset komt uit de paper “A systematic benchmark of Nanopore long read RNA sequencing for transcript level analysis in human cell lines”. Om deze datasets te kunnen vergelijken met elkaar zullen er een aantal quality control stappen uitgevoerd moeten worden, deze stappen worden uitgevoerd aan de hand van het programma nanoplot. Nanoplot is een tool in de bio informatica die veel gebruikt wordt voor de analyse en visualisatie van data die gegenereerd is uit nanopore sequencing technologieën. Met nanoplot kunnen verschillende grafieken gemaakt worden waarmee de kwaliteit en kenmerken van nanopore sequencing gegevens kunnen worden beoordeeld. Het biedt verschillende functies, waaronder evaluatie van de kwaliteit van base calling, verdeling van de lengte van de reads, analyse van GC-gehalte en analyse van adapterinhoud. Nanoplot is dus een erg waardevol hulpmiddel voor het verkrijgen van inzicht in eigenschappen van nanopore sequencing gegevens. 
+Omdat de betrouwbaarheid van de ILC data onbekend is zal dit eerst onderzocht moeten worden, dit wordt gedaan door de ILC data te vergelijken met een andere RNA-sequencing dataset. Deze dataset komt uit de paper “A systematic benchmark of Nanopore long read RNA sequencing for transcript level analysis in human cell lines”[@chen_systematic_2021]. Om deze datasets te kunnen vergelijken met elkaar zullen er een aantal quality control stappen uitgevoerd moeten worden, deze stappen worden uitgevoerd aan de hand van het programma nanoplot [@de_coster_nanopack_2018]. Nanoplot is een tool in de bio informatica die veel gebruikt wordt voor de analyse en visualisatie van data die gegenereerd is uit nanopore sequencing technologieën. Met nanoplot kunnen verschillende grafieken gemaakt worden waarmee de kwaliteit en kenmerken van nanopore sequencing gegevens kunnen worden beoordeeld. Het biedt verschillende functies, waaronder evaluatie van de kwaliteit van base calling, verdeling van de lengte van de reads, analyse van GC-gehalte en analyse van adapterinhoud. Nanoplot is dus een erg waardevol hulpmiddel voor het verkrijgen van inzicht in eigenschappen van nanopore sequencing gegevens. 
 
-Naast het controleren van de data moet er ook een alignement gedaan worden, omdat we werken met long read data gebruiken we hiervoor minimap2. Minimap2 is een veelgebruikt alignerings programma dat wordt gebruikt voor het in kaart brengen van DNA of RNA sequenties tegen een groot referentie genoom (of in ons geval transcriptoom). Minimap2 genereert SAM bestanden waarin de alignement te vinden is. Het SAM-format heet ook wel een Sequence Alignment Map, het wordt gebruikt om data, verkregen uit sequentie alignments, op te slaan zoals ze worden gegenereerd. 
+Naast het controleren van de data moet er ook een alignement gedaan worden, omdat we werken met long read data gebruiken we hiervoor minimap2 [@li_minimap2_2018]. Minimap2 is een veelgebruikt alignerings programma dat wordt gebruikt voor het in kaart brengen van DNA of RNA sequenties tegen een groot referentie genoom (of in ons geval transcriptoom). Minimap2 genereert SAM bestanden [@canovas_csam_2016] & [@li_sequence_2009] waarin de alignement te vinden is. Het SAM-format heet ook wel een Sequence Alignment Map, het wordt gebruikt om data, verkregen uit sequentie alignments, op te slaan zoals ze worden gegenereerd. 
 
 Ook moet de data gevisualiseerd worden, zodat de resultaten op een duidelijke manier gepresenteerd kunnen worden. Er zal gebruik gemaakt worden van PCA- en tSNE-plots om de MCF7 data van het ILC te vergelijken met de gepubliceerde dataset uit de paper. Ook zullen er scatter plots gebruikt worden om een paarsgewijze vergelijking te kunnen maken tussen de verschillende datasets. Er wordt ernaar gestreefd om de sequencing data te visualiseren in de IGV browser. Hiervoor moet een aangepaste workflow ontwikkeld worden om de fastQ bestanden om te kunnen zetten naar bigwig bestanden. Deze bigwig bestanden kunnen vervolgens worden ingelezen door de IGV browser. Deze visualisaties helpen om een dieper inzicht te krijgen in de distributie en expressie van de reads. 
 
@@ -28,12 +21,12 @@ _word count: _ 511
 ___Bibliography: ___ 
 _created by Zotero_
 
-- @de_coster_nanopack_2018: de Coster, W., D'Hert, S., Schultz, D. T., Cruts, M., & van Broeckhoven, C. (2018). NanoPack: visualizing and processing long-read sequencing data. Geraadpleegd van [https://academic.oup.com/bioinformatics/article/34/15/2666/4934939](https://academic.oup.com/bioinformatics/article/34/15/2666/4934939).
+- de Coster, W., D'Hert, S., Schultz, D. T., Cruts, M., & van Broeckhoven, C. (2018). NanoPack: visualizing and processing long-read sequencing data. Geraadpleegd van [https://academic.oup.com/bioinformatics/article/34/15/2666/4934939](https://academic.oup.com/bioinformatics/article/34/15/2666/4934939).
 
-- @li_minimap2_2018: Li, H. (2018). Minimap2: pairwise alignment for nucleotide sequences. Geraadpleegd van [https://pubmed.ncbi.nlm.nih.gov/29750242/](https://pubmed.ncbi.nlm.nih.gov/29750242/).
+- Li, H. (2018). Minimap2: pairwise alignment for nucleotide sequences. Geraadpleegd van [https://pubmed.ncbi.nlm.nih.gov/29750242/](https://pubmed.ncbi.nlm.nih.gov/29750242/).
 
-- @canovas_csam_2016: Cánovas, R., Moffat, A., & Turpin, T. (2016). CSAM: Compressed SAM format. Geraadpleegd van [https://academic.oup.com/bioinformatics/article/32/24/3709/2525655](https://academic.oup.com/bioinformatics/article/32/24/3709/2525655).
+- Cánovas, R., Moffat, A., & Turpin, T. (2016). CSAM: Compressed SAM format. Geraadpleegd van [https://academic.oup.com/bioinformatics/article/32/24/3709/2525655](https://academic.oup.com/bioinformatics/article/32/24/3709/2525655).
 
-- @li_sequence_2009: Li, H., Handshaker, B., Wysoker, A., Fennell, T., Ruan, J., Homer, N., ... Durbin, R. (2009). The Sequence Alignment/Map format and SAMtools. Geraadpleegd van [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2723002/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2723002/).
+- Li, H., Handshaker, B., Wysoker, A., Fennell, T., Ruan, J., Homer, N., ... Durbin, R. (2009). The Sequence Alignment/Map format and SAMtools. Geraadpleegd van [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2723002/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2723002/).
 
-- @chen_systematic_2021: Chen, Y., Davidson, N. M., Wan, Y. K., Patel, H., Yao, F., Low, H. M., ... Göke, J. (2021). A systematic benchmark of Nanopore long read RNA sequencing for transcript level analysis in human cell lines. Geraadpleegd van [https://www.nature.com/articles/s41598-021-87257-4](https://www.nature.com/articles/s41598-021-87257-4).
+- Chen, Y., Davidson, N. M., Wan, Y. K., Patel, H., Yao, F., Low, H. M., ... Göke, J. (2021). A systematic benchmark of Nanopore long read RNA sequencing for transcript level analysis in human cell lines. Geraadpleegd van [https://www.nature.com/articles/s41598-021-87257-4](https://www.nature.com/articles/s41598-021-87257-4).
