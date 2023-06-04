@@ -8,7 +8,7 @@ bibliography: Zotero_bibliography.bib
 params:
   country: "Nederland"
   year: 2022
-  period: "januari-februari"
+  month: "januari"
 ---
 # Portfolio
 ___Auteur:___ Nonne Hodes, 

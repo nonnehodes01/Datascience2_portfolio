@@ -1,13 +1,68 @@
 # Opdracht 9: RMarkdown parameters & presentations
 
+In deze opdracht zal er een geparametriseert rapport gecreëerd worden voor COVID-19-gevallen. Het rapport zal interactief zijn, zodat gebruikers parameters kunnen instellen zoals land, jaar en periode. We zullen gebruikmaken van COVID-19-casegegevens van het ECDC en grafieken tonen voor gevallen en sterfgevallen. Het uiteindelijke rapport zal een flexibel en informatief middel zijn om COVID-19-gegevens te verkennen op basis van specifieke criteria.
 
-__COVID-19-rapport voor `r params$country`__
 
-Dit rapport toont COVID-19-gevallen en sterfgevallen voor `r params$country` gedurende de periode `r params$period` in `r params$year`.
+```{r inladen_libaries, include=FALSE}
+# Laad de vereiste bibliotheeken in
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
 
-__Grafiek van COVID-19-gevallen__
-
-```{r cases_chart}
-# Code om de grafiek van COVID-19-gevallen te genereren
-# Gebruik de parameters om de gegevens op het gekozen land, jaar en periode te filteren
 ```
+
+## COVID-19-rapport zonder parametrisering
+
+Eerst wordt de data ingeladen, omdat het een CSV bestand is wordt er gebruik gemaakt van de read.csv functie. 
+```{r read_data}
+# inlezen van de data
+covid_19_data <- read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/data_portfolio_opdracht_9.csv")
+
+``` 
+
+Vervolgens moet de data geselecteerd worden. Er is hier gekozen voor covid 19 gevallen en doden in 2020 in Nederland. 
+
+```{r maken van cases}
+
+#dataset filteren voor 2020 en Nederland
+covid_19_data_filtered <- covid_19_data %>%
+  filter(year == 2020,
+  countriesAndTerritories == "Netherlands", )
+
+#berekenen van cases per maand
+cases_per_maand <- covid_19_data_filtered %>%
+  group_by(month) %>%
+  summarise(cases_per_maand = sum(cases))
+
+
+#berekenen van deaths per maand
+deaths_per_maand <- covid_19_data_filtered %>%
+  group_by(month) %>%
+  summarise(deaths_per_maand = sum(deaths))
+
+```
+
+Tot slot kan de verkregen data geplot worden, hiervoor wordt ggplot2 gebruikt. om de maanden te weergeven in de juiste volgorde is de regel; 
+"r scale_x_continuous(breaks = 1:12, labels = month.name) +"
+toegevoegd. deze regel zorgt ervoor dat de x-as van een plot met continue data wordt aangepast. 
+
+```{r plots}
+ggplot(cases_per_maand, aes(x = month, y = cases_per_maand)) + 
+  geom_point() +
+  scale_x_continuous(breaks = 1:12, labels = month.name) +
+  labs(title = "Aantal covid 19 gevallen in nederland in 2020",
+       x = "Maand",
+       y = "Aantal Gevallen")
+
+ggplot(deaths_per_maand, aes(x = month, y = deaths_per_maand)) + 
+  geom_point() +
+  scale_x_continuous(breaks = 1:12, labels = month.name) +
+  labs(title = "Aantal covid 19 doden in nederland in 2020",
+       x = "Maand",
+       y = "Aantal Doden")
+
+```
+
+## COVID-19-rapport met parametrisering
+
+je moeder

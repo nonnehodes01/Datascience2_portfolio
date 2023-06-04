@@ -154,7 +154,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="opdracht-6-output-pages.html"><a href="opdracht-6-output-pages.html"><i class="fa fa-check"></i>Opdracht 6: Output pages</a></li>
 <li class="chapter" data-level="" data-path="opdracht-7-relationele-data-en-databases.html"><a href="opdracht-7-relationele-data-en-databases.html"><i class="fa fa-check"></i>Opdracht 7: Relationele data en databases</a></li>
 <li class="chapter" data-level="" data-path="opdracht-8-een-r-package-bouwen.html"><a href="opdracht-8-een-r-package-bouwen.html"><i class="fa fa-check"></i>Opdracht 8: Een R package bouwen</a></li>
-<li class="chapter" data-level="" data-path="opdracht-9-rmarkdown-parameters-presentations.html"><a href="opdracht-9-rmarkdown-parameters-presentations.html"><i class="fa fa-check"></i>Opdracht 9: RMarkdown parameters &amp; presentations</a></li>
+<li class="chapter" data-level="" data-path="opdracht-9-rmarkdown-parameters-presentations.html"><a href="opdracht-9-rmarkdown-parameters-presentations.html"><i class="fa fa-check"></i>Opdracht 9: RMarkdown parameters &amp; presentations</a>
+<ul>
+<li class="chapter" data-level="" data-path="opdracht-9-rmarkdown-parameters-presentations.html"><a href="opdracht-9-rmarkdown-parameters-presentations.html#covid-19-rapport-zonder-parametrisering"><i class="fa fa-check"></i>COVID-19-rapport zonder parametrisering</a></li>
+<li class="chapter" data-level="" data-path="opdracht-9-rmarkdown-parameters-presentations.html"><a href="opdracht-9-rmarkdown-parameters-presentations.html#covid-19-rapport-met-parametrisering"><i class="fa fa-check"></i>COVID-19-rapport met parametrisering</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -174,12 +178,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="opdracht-9-rmarkdown-parameters-presentations" class="section level1 hasAnchor">
 <h1>Opdracht 9: RMarkdown parameters &amp; presentations<a href="opdracht-9-rmarkdown-parameters-presentations.html#opdracht-9-rmarkdown-parameters-presentations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>COVID-19-rapport voor Nederland</strong></p>
-<p>Dit rapport toont COVID-19-gevallen en sterfgevallen voor het land Nederland gedurende de periode januari-februari van het jaar 2022.</p>
-<p><strong>Grafiek van COVID-19-gevallen</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code om de grafiek van COVID-19-gevallen te genereren</span></span>
-<span id="cb2-2"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Gebruik de parameters om de gegevens op het gekozen land, jaar en periode te filteren</span></span></code></pre></div>
+<p>In deze opdracht zal er een geparametriseert rapport gecreëerd worden voor COVID-19-gevallen. Het rapport zal interactief zijn, zodat gebruikers parameters kunnen instellen zoals land, jaar en periode. We zullen gebruikmaken van COVID-19-casegegevens van het ECDC en grafieken tonen voor gevallen en sterfgevallen. Het uiteindelijke rapport zal een flexibel en informatief middel zijn om COVID-19-gegevens te verkennen op basis van specifieke criteria.</p>
+<div id="covid-19-rapport-zonder-parametrisering" class="section level2 hasAnchor">
+<h2>COVID-19-rapport zonder parametrisering<a href="opdracht-9-rmarkdown-parameters-presentations.html#covid-19-rapport-zonder-parametrisering" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Eerst wordt de data ingeladen, omdat het een CSV bestand is wordt er gebruik gemaakt van de read.csv functie.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inlezen van de data</span></span>
+<span id="cb2-2"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb2-2" aria-hidden="true" tabindex="-1"></a>covid_19_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/HU_ILC_DS2/Datascience2_portfolio/data/data_portfolio_opdracht_9.csv&quot;</span>)</span></code></pre></div>
+<p>Vervolgens moet de data geselecteerd worden. Er is hier gekozen voor covid 19 gevallen en doden in 2020 in Nederland.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#dataset filteren voor 2020 en Nederland</span></span>
+<span id="cb3-2"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-2" aria-hidden="true" tabindex="-1"></a>covid_19_data_filtered <span class="ot">&lt;-</span> covid_19_data <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2020</span>,</span>
+<span id="cb3-4"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  countriesAndTerritories <span class="sc">==</span> <span class="st">&quot;Netherlands&quot;</span>, )</span>
+<span id="cb3-5"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#berekenen van cases per maand</span></span>
+<span id="cb3-7"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-7" aria-hidden="true" tabindex="-1"></a>cases_per_maand <span class="ot">&lt;-</span> covid_19_data_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb3-9"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cases_per_maand =</span> <span class="fu">sum</span>(cases))</span>
+<span id="cb3-10"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#berekenen van deaths per maand</span></span>
+<span id="cb3-13"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-13" aria-hidden="true" tabindex="-1"></a>deaths_per_maand <span class="ot">&lt;-</span> covid_19_data_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb3-14"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb3-15"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">deaths_per_maand =</span> <span class="fu">sum</span>(deaths))</span></code></pre></div>
+<p>Tot slot kan de verkregen data geplot worden, hiervoor wordt ggplot2 gebruikt. om de maanden te weergeven in de juiste volgorde is de regel;
+“r scale_x_continuous(breaks = 1:12, labels = month.name) +”
+toegevoegd. deze regel zorgt ervoor dat de x-as van een plot met continue data wordt aangepast.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cases_per_maand, <span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> cases_per_maand)) <span class="sc">+</span> </span>
+<span id="cb4-2"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-3"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">labels =</span> month.name) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Aantal covid 19 gevallen in nederland in 2020&quot;</span>,</span>
+<span id="cb4-5"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb4-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Maand&quot;</span>,</span>
+<span id="cb4-6"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb4-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Aantal Gevallen&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/plots-1.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(deaths_per_maand, <span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> deaths_per_maand)) <span class="sc">+</span> </span>
+<span id="cb5-2"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-3"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">labels =</span> month.name) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Aantal covid 19 doden in nederland in 2020&quot;</span>,</span>
+<span id="cb5-5"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb5-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Maand&quot;</span>,</span>
+<span id="cb5-6"><a href="opdracht-9-rmarkdown-parameters-presentations.html#cb5-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Aantal Doden&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/plots-2.png" width="672" /></p>
+</div>
+<div id="covid-19-rapport-met-parametrisering" class="section level2 hasAnchor">
+<h2>COVID-19-rapport met parametrisering<a href="opdracht-9-rmarkdown-parameters-presentations.html#covid-19-rapport-met-parametrisering" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>je moeder</p>
 
+</div>
 </div>
             </section>
 
