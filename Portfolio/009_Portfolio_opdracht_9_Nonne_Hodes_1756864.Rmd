@@ -1,1 +1,13 @@
 # Opdracht 9: RMarkdown parameters & presentations
+
+
+__COVID-19-rapport voor `r params$country`__
+
+Dit rapport toont COVID-19-gevallen en sterfgevallen voor `r params$country` gedurende de periode `r params$period` in `r params$year`.
+
+__Grafiek van COVID-19-gevallen__
+
+```{r cases_chart}
+# Code om de grafiek van COVID-19-gevallen te genereren
+# Gebruik de parameters om de gegevens op het gekozen land, jaar en periode te filteren
+```

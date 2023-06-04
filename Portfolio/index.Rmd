@@ -5,6 +5,10 @@ output:
   bookdown::gitbook:
     number_sections: no
 bibliography: Zotero_bibliography.bib
+params:
+  country: "Nederland"
+  year: 2022
+  period: "januari-februari"
 ---
 # Portfolio
 ___Auteur:___ Nonne Hodes, 
