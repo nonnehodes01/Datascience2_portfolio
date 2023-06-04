@@ -6,9 +6,9 @@ output:
     number_sections: no
 bibliography: Zotero_bibliography.bib
 params:
-  country: "Nederland"
-  year: 2022
-  month: "januari"
+  country: "Austria"
+  year: 2020
+  period: "3-11"
 ---
 # Portfolio
 ___Auteur:___ Nonne Hodes, 
