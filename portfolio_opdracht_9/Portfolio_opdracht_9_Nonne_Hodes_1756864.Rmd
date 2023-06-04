@@ -3,17 +3,89 @@ title: "Formatieve opdracht 9"
 author: "Nonne Hodes"
 date: "`r Sys.Date()`"
 output: html_document
+params:
+  country: "Austria"
+  year: 2020
+  period: "3-8"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r librarys, message=FALSE, echo=FALSE}
-```
-
-__opdracht 9:__
-_Een geparametriseerd rapport voor de COVID-19-gevallen_
-```{r formatieve opdracht les 9}
+```{r inladen_libaries, include=FALSE}
+# Laad de vereiste bibliotheeken in
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
 
 ```
+
+Eerst wordt de data ingeladen, omdat het een CSV bestand is wordt er gebruik gemaakt van de read.csv functie. 
+
+```{r read_data}
+# inlezen van de data
+covid_19_data_2 <- read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/data_portfolio_opdracht_9.csv")
+
+# maken van params
+param_country <- params$country
+param_year <- params$year
+
+``` 
+
+Vervolgens moet er verder gewerkt worden met parametrisering. er wordt hier gebruikt gemaakt met de params; country: "Nederland", year: 2020. Deze zijn aan te passen in het bestand index.rmd naar een ander param. als je bijvoorbeeld "Netherlands veranders voor "Austria" zullen de gegevens voor Oostenrijk gegeven worden. 
+
+Bij deze params moeten vervolgens ook de cases en deaths per maand berekend worden
+
+```{r maken van cases}
+
+#dataset filterenvoor 2020 en Nederland
+covid_19_data_filtered_2 <- covid_19_data_2 %>%
+  filter(year == param_year,
+         countriesAndTerritories == param_country, )
+
+# Split de periode in start- en eindmaand
+period_parts <- strsplit(params$period, "-")[[1]]
+start_month <- as.integer(period_parts[1])
+end_month <- as.integer(period_parts[2])
+
+# Dataset filteren op de opgegeven periode
+covid_19_data_filtered_3 <- covid_19_data_filtered_2 %>%
+  filter(month >= start_month,
+         month <= end_month)
+
+#berekenen van cases per maand
+cases_per_maand_2 <- covid_19_data_filtered_3 %>%
+  group_by(month) %>%
+  summarise(cases_per_maand = sum(cases))
+
+
+#berekenen van deaths per maand
+deaths_per_maand_2 <- covid_19_data_filtered_3 %>%
+  group_by(month) %>%
+  summarise(deaths_per_maand = sum(deaths))
+
+```
+
+om de namen van de maanden in de gekozen periode te kunnen weergeven moeten de getallen omgezet worden naar de namen, dit kan als volgt;
+
+```{r maand namen}
+month_name_start <- month.name[start_month]
+month_name_end <- month.name[end_month]
+```
+
+```{r plots}
+
+ggplot(cases_per_maand_2, aes(x = month, y = cases_per_maand)) + 
+  geom_point() +
+  scale_x_continuous(breaks = 1:12, labels = month.name) +
+  labs(title = paste("Aantal COVID-19 doden in", param_country, "in", param_year, "in de periode", month_name_start, "tot", month_name_end),
+       x = "Maand",
+       y = "Aantal Gevallen")
+
+
+ggplot(deaths_per_maand_2, aes(x = month, y = deaths_per_maand)) + 
+  geom_point() +
+  scale_x_continuous(breaks = 1:12, labels = month.name) +
+  labs(title =  paste("Aantal COVID-19 doden in", param_country, "in", param_year, "in de periode", month_name_start, "tot", month_name_end),
+       x = "Maand",
+       y = "Aantal Doden")
+
+```
+
