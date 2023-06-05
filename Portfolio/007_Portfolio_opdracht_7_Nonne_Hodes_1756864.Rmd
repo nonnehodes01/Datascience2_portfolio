@@ -154,7 +154,7 @@ dbWriteTable(con, "gapminder_data_rds", readRDS("~/HU_ILC_DS2/Datascience2_portf
 
 ```
 
-De tabellen zijn nu ingeladen in dbever. De volgende stap is om de inhoud van de tabellen in dbever te inspecteren aan de hand van SQL. De code in ce chunk hieronder is niet gerund, deze is in dbeaver gerund. het gevormde sql file is te vinden in mijn [Github]() repository. 
+De tabellen zijn nu ingeladen in dbever. De volgende stap is om de inhoud van de tabellen in dbever te inspecteren aan de hand van SQL. De code in de chunk hieronder is niet gerund, deze is in dbeaver gerund. het gevormde sql file is te vinden in mijn [Github](https://github.com/nonnehodes01/Datascience2_portfolio/tree/main/portfolio_opdracht_7) repository met als bestandsnaam "data_inspecteren.sql". 
 
 
 ```{sql sql1, eval=FALSE}
@@ -240,7 +240,8 @@ dbWriteTable(con, "merged_dengue_rds", read.csv("~/HU_ILC_DS2/Datascience2_portf
 
 ```
 
-Aan de hand van de schone gegevens is een merged tabel gemaakt aan de hand van de volgende code. 
+Aan de hand van de schone gegevens is een merged tabel gemaakt aan de hand van de volgende code. De code in de chunk hieronder is niet gerund, deze is in dbeaver gerund. het gevormde sql file is te vinden in mijn [Github](https://github.com/nonnehodes01/Datascience2_portfolio/tree/main/portfolio_opdracht_7) repository met als bestandsnaam; "merge_data.sql". 
+ 
 
 ```{sql sql2, eval=FALSE}
 
