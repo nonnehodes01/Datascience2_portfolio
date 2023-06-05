@@ -101,9 +101,21 @@ str(gapminder_data_df[c("country", "year")])
 
 ```
 
-Nu de gegevenstypen overeen komen kunnen de dataframes opgeslagen worden als .csv en .rds bestanden. 
+Nu de gegevenstypen overeen komen kunnen de dataframes opgeslagen worden als .csv en .rds bestanden. deze worden opgeslagen naar de map "data"
 
 ```{r opslaan van de dataframes}
+# pad naar de map toevoegen (om typfouten te voorkomen)
+mapnaam <- "~/HU_ILC_DS2/Datascience2_portfolio/data/"
+
+# dataframes opslaan als .csv
+write.csv(flu_data_tidy_df_2, file = paste0(mapnaam, "flu_data_tidy.csv"))
+write.csv(dengue_data_tidy_df_2, file = paste0(mapnaam, "dengue_data_tidy.csv"))
+write.csv(gapminder_data_df, file = paste0(mapnaam, "gapminder_data_tidy.csv"))
+
+# dataframes opslaan als .rds
+saveRDS(flu_data_tidy_df_2, file = paste0(mapnaam, "flu_data_tidy.rds"))
+saveRDS(dengue_data_tidy_df_2, file = paste0(mapnaam, "dengue_data_tidy.rds"))
+saveRDS(gapminder_data_df, file = paste0(mapnaam, "gapminder_data_tidy.rds"))
 
 ```
 
