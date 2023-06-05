@@ -126,10 +126,9 @@ saveRDS(dengue_data_tidy_df_2, file = paste0(mapnaam, "dengue_data_tidy.rds"))
 saveRDS(gapminder_data_df, file = paste0(mapnaam, "gapminder_data_tidy.rds"))
 
 ```
+Eerst wordt er verbinding gemaakt met de database.
 
-Nu kunnen de tabellen ingevoegd worden in de postgreSQL database "workflowsdb"
-
-```{r invoegen van tabellen}
+```{r connectie maken}
 #verbinding maken met database
 con <- dbConnect(RPostgres::Postgres(),
                  host = "localhost",
@@ -137,6 +136,11 @@ con <- dbConnect(RPostgres::Postgres(),
                  dbname = "workflowsdb",
                  user = "postgres",
                  password = "Muis1234")
+
+```
+Nu kunnen de tabellen ingevoegd worden in de postgreSQL database "workflowsdb"
+
+```{r invoegen van tabellen}
 
 #tabellen maken en invoegen CSV
 dbWriteTable(con, "flu_data_csv", read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/flu_data_tidy.csv"), overwrite = TRUE)
@@ -183,7 +187,7 @@ head(gapminder_data_rds)
 
 ``` 
 
-Nu moeten de gegevens van de gapminder toegevoegd worden aan de dengue en flu. 
+Nu moeten de gegevens van de gapminder toegevoegd worden aan de dengue en flu.
 
 ```{r gapminder toevoegen aan dengue en flu}
 
@@ -195,3 +199,24 @@ merged_dengue <- left_join(dengue_data_tidy_df_2, gapminder_data_df, by = c("cou
 
 ```
 
+Deze schone gegevens moeten vervolgens bewaard worden in de workflowsdb database.
+
+```{r merged files toevoegen aan database, warning=FALSE}
+# dataframes opslaan als .csv
+write.csv(merged_flu, file = paste0(mapnaam, "merged_flu.csv"))
+write.csv(merged_dengue, file = paste0(mapnaam, "merged_dengue.csv"))
+
+# dataframes opslaan als .rds
+saveRDS(merged_flu, file = paste0(mapnaam, "merged_flu.rds"))
+saveRDS(merged_dengue, file = paste0(mapnaam, "merged_dengue.rds"))
+
+
+#tabellen maken en invoegen CSV
+dbWriteTable(con, "merged_flu_csv", read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/merged_flu.csv"), overwrite = TRUE)
+dbWriteTable(con, "merged_dengue_csv", read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/merged_dengue.csv"), overwrite = TRUE)
+
+#tabellen maken en invoegen RDS
+dbWriteTable(con, "merged_flu_rds", read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/merged_flu.rds"), overwrite = TRUE)
+dbWriteTable(con, "merged_dengue_rds", read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/merged_dengue.rds"), overwrite = TRUE)
+
+```
