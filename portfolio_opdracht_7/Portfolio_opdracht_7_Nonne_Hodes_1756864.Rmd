@@ -10,6 +10,7 @@ install.packages('RPostgreSQL')
 install.packages('remotes')
 install.packages('RPostgres')
 library(dslabs)
+library(dplyr)
 library(tidyverse)
 library(RPostgreSQL)
 library(remotes)
@@ -150,4 +151,19 @@ dbWriteTable(con, "gapminder_data_rds", readRDS("~/HU_ILC_DS2/Datascience2_portf
 
 ```
 
+De tabellen zijn nu ingeladen in dbever. De volgende stap is om de inhoud van de tabellen in dbever te inspecteren aan de hand van SQL. 
+
+*doe sql*
+
+Nu moeten de gegevens van de gapminder toegevoegd worden aan de dengue en flu. 
+
+```{r gapminder toevoegen aan dengue en flu}
+
+# Samenvoegen van gapminder_data_df met flu_data_tidy_df_2 op basis van country en year
+merged_flu <- left_join(flu_data_tidy_df_2, gapminder_data_df, by = c("country", "year"))
+
+# Samenvoegen van gapminder_data_df met dengue_data_tidy_df_2 op basis van country en year
+merged_dengue <- left_join(dengue_data_tidy_df_2, gapminder_data_df, by = c("country", "year"))
+
+```
 
