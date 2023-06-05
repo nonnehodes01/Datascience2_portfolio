@@ -129,6 +129,7 @@ saveRDS(gapminder_data_df, file = paste0(mapnaam, "gapminder_data_tidy.rds"))
 Nu kunnen de tabellen ingevoegd worden in de postgreSQL database "workflowsdb"
 
 ```{r invoegen van tabellen}
+#verbinding maken met database
 con <- dbConnect(RPostgres::Postgres(),
                  host = "localhost",
                  port = 5432,
@@ -136,7 +137,16 @@ con <- dbConnect(RPostgres::Postgres(),
                  user = "postgres",
                  password = "Muis1234")
 
+#tabellen maken en invoegen CSV
+dbWriteTable(con, "flu_data_csv", read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/flu_data_tidy.csv"), overwrite = TRUE)
+dbWriteTable(con, "dengue_data_csv", read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/dengue_data_tidy.csv"), overwrite = TRUE)
+dbWriteTable(con, "gapminder_data_csv", read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/gapminder_data_tidy.csv"), overwrite = TRUE)
 
+
+#tabellen maken en invoegen RDS
+dbWriteTable(con, "flu_data_rds", readRDS("~/HU_ILC_DS2/Datascience2_portfolio/data/flu_data_tidy.rds"), overwrite = TRUE)
+dbWriteTable(con, "dengue_data_rds", readRDS("~/HU_ILC_DS2/Datascience2_portfolio/data/dengue_data_tidy.rds"), overwrite = TRUE)
+dbWriteTable(con, "gapminder_data_rds", readRDS("~/HU_ILC_DS2/Datascience2_portfolio/data/gapminder_data_tidy.rds"), overwrite = TRUE)
 
 ```
 
