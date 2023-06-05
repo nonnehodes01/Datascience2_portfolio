@@ -155,6 +155,34 @@ De tabellen zijn nu ingeladen in dbever. De volgende stap is om de inhoud van de
 
 *doe sql*
 
+We gaan ook de tabellen inspecteren met R aan de hand van dplyr. 
+
+```{r tabellen inspecteren}
+# inlezen van de data
+flu_data_csv <-read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/flu_data_tidy.csv")
+
+dengue_data_csv <- read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/dengue_data_tidy.csv")
+
+gapminder_data_csv <- read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/gapminder_data_tidy.csv")
+
+flu_data_rds <- readRDS("~/HU_ILC_DS2/Datascience2_portfolio/data/flu_data_tidy.rds")
+
+dengue_data_rds <- readRDS("~/HU_ILC_DS2/Datascience2_portfolio/data/dengue_data_tidy.rds")
+
+gapminder_data_rds <- readRDS("~/HU_ILC_DS2/Datascience2_portfolio/data/gapminder_data_tidy.rds")
+
+
+# inspecteer de inhoud van de tabellen
+
+head(flu_data_csv)
+head(dengue_data_csv)
+head(gapminder_data_csv)
+head(flu_data_rds)
+head(dengue_data_rds)
+head(gapminder_data_rds)
+
+``` 
+
 Nu moeten de gegevens van de gapminder toegevoegd worden aan de dengue en flu. 
 
 ```{r gapminder toevoegen aan dengue en flu}
