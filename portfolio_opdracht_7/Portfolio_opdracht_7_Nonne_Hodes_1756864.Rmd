@@ -6,8 +6,15 @@ output: html_document
 ---
 ```{r inlezen libraries}
 install.packages("dslabs")
+install.packages('RPostgreSQL')
+install.packages('remotes')
+install.packages('RPostgres')
 library(dslabs)
 library(tidyverse)
+library(RPostgreSQL)
+library(remotes)
+library(RPostgres)
+library(DBI)
 
 ```
 
@@ -118,4 +125,19 @@ saveRDS(dengue_data_tidy_df_2, file = paste0(mapnaam, "dengue_data_tidy.rds"))
 saveRDS(gapminder_data_df, file = paste0(mapnaam, "gapminder_data_tidy.rds"))
 
 ```
+
+Nu kunnen de tabellen ingevoegd worden in de postgreSQL database "workflowsdb"
+
+```{r invoegen van tabellen}
+con <- dbConnect(RPostgres::Postgres(),
+                 host = "localhost",
+                 port = 5432,
+                 dbname = "workflowsdb",
+                 user = "postgres",
+                 password = "Muis1234")
+
+
+
+```
+
 
