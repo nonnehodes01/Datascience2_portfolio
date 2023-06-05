@@ -4,11 +4,11 @@ author: "Nonne Hodes"
 date: "`r Sys.Date()`"
 output: html_document
 ---
-```{r inlezen libraries}
-install.packages("dslabs")
-install.packages('RPostgreSQL')
-install.packages('remotes')
-install.packages('RPostgres')
+```{r inlezen libraries, warning=FALSE, include=FALSE}
+#install.packages("dslabs")
+#install.packages('RPostgreSQL')
+#install.packages('remotes')
+#install.packages('RPostgres')
 library(dslabs)
 library(dplyr)
 library(tidyverse)
@@ -16,6 +16,7 @@ library(RPostgreSQL)
 library(remotes)
 library(RPostgres)
 library(DBI)
+library(ggplot2)
 
 ```
 
@@ -24,7 +25,7 @@ _Relationele databases (SQL/database- vaardigheden)_
 
 We beginnen met het inlezen van de data en deze tidy maken. 
 
-```{r data laden en tidy maken}
+```{r data laden en tidy maken, warning=FALSE, message=FALSE}
 # inlezen van de flu data
 flu_data <- read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/flu_data_portfolio_opdracht_7.csv")
 
@@ -61,7 +62,7 @@ gapminder_data_df <- as.data.frame(gapminder_data)
 
 Nu de dataframes gemaakt zijn kunnen de klassen gecontrolleerd worden. 
 
-```{r klasse uitzoeken en aanpassen}
+```{r klasse uitzoeken en aanpassen, warning=FALSE}
 # onderzoeken wat de classes zijn
 class(flu_data_tidy_df)
 class(dengue_data_tidy_df)
@@ -70,7 +71,7 @@ class(gapminder_data_df)
 
 De classes komen overeen. Nu kan er uitgezocht worden wat de gegevenstype zijn, deze kunnen zo nodig aangepast worden. 
 
-```{r gegevenstype uitzoeken en aanpassen}
+```{r gegevenstype uitzoeken en aanpassen, warning=FALSE, message=FALSE}
 #uitzoeken of de gegevenstypen over een komen
 str(flu_data_tidy_df[c("country", "Date")])
 str(dengue_data_tidy_df[c("country", "Date")])
@@ -79,7 +80,7 @@ str(dengue_data_tidy_df[c("country", "Date")])
 
 De gegevenstypen komen overeen, maar in de gapminder data is de "Date" geen datum, maar alleen een jaar in de kolom "Year". om dit op te lossen wordt er aand de flue en dengue data een extra kolom met "year" toegevoegd.
 
-```{r gegevenstype uitzoeken en aanpassen 2}
+```{r gegevenstype uitzoeken en aanpassen 2, warning=FALSE}
 flu_data_tidy_df_2 <- flu_data_tidy_df %>%
   mutate(year = year(ymd(Date)))
 
@@ -94,7 +95,7 @@ str(gapminder_data_df[c("country", "year")])
 
 De gegevenstypen komen niet overeen. De kolommen "country" en "year"zijn in de gapminder dataframe van de gegevenstypes "Factor with leves" en "integer", deze zijn in de flue en dengue data van de gegevenstypes "character" en "number". dit moet worden opgelost. 
 
-```{r gegevenstype uitzoeken en aanpassen 3}
+```{r gegevenstype uitzoeken en aanpassen 3, warning=FALSE}
 # gegevenstypen aanpassen
 flu_data_tidy_df_2$country <- as.factor(flu_data_tidy_df_2$country)
 flu_data_tidy_df_2$year <- as.integer(flu_data_tidy_df_2$year)
@@ -111,7 +112,7 @@ str(gapminder_data_df[c("country", "year")])
 
 Nu de gegevenstypen overeen komen kunnen de dataframes opgeslagen worden als .csv en .rds bestanden. deze worden opgeslagen naar de map "data"
 
-```{r opslaan van de dataframes}
+```{r opslaan van de dataframes, warning=FALSE, message=FALSE}
 # pad naar de map toevoegen (om typfouten te voorkomen)
 mapnaam <- "~/HU_ILC_DS2/Datascience2_portfolio/data/"
 
@@ -126,9 +127,10 @@ saveRDS(dengue_data_tidy_df_2, file = paste0(mapnaam, "dengue_data_tidy.rds"))
 saveRDS(gapminder_data_df, file = paste0(mapnaam, "gapminder_data_tidy.rds"))
 
 ```
+
 Eerst wordt er verbinding gemaakt met de database.
 
-```{r connectie maken}
+```{r connectie maken, warning=FALSE, message=FALSE}
 #verbinding maken met database
 con <- dbConnect(RPostgres::Postgres(),
                  host = "localhost",
@@ -138,9 +140,10 @@ con <- dbConnect(RPostgres::Postgres(),
                  password = "Muis1234")
 
 ```
+
 Nu kunnen de tabellen ingevoegd worden in de postgreSQL database "workflowsdb"
 
-```{r invoegen van tabellen}
+```{r invoegen van tabellen, warning=FALSE, message=FALSE}
 
 #tabellen maken en invoegen CSV
 dbWriteTable(con, "flu_data_csv", read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/flu_data_tidy.csv"), overwrite = TRUE)
@@ -161,7 +164,7 @@ De tabellen zijn nu ingeladen in dbever. De volgende stap is om de inhoud van de
 
 We gaan ook de tabellen inspecteren met R aan de hand van dplyr. 
 
-```{r tabellen inspecteren}
+```{r tabellen inspecteren, warning=FALSE}
 # inlezen van de data
 flu_data_csv <-read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/flu_data_tidy.csv")
 
@@ -189,7 +192,7 @@ head(gapminder_data_rds)
 
 Nu moeten de gegevens van de gapminder toegevoegd worden aan de dengue en flu.
 
-```{r gapminder toevoegen aan dengue en flu}
+```{r gapminder toevoegen aan dengue en flu, warning=FALSE, message=FALSE}
 
 # Samenvoegen van gapminder_data_df met flu_data_tidy_df_2 op basis van country en year
 merged_flu <- left_join(flu_data_tidy_df_2, gapminder_data_df, by = c("country", "year"))
@@ -201,7 +204,7 @@ merged_dengue <- left_join(dengue_data_tidy_df_2, gapminder_data_df, by = c("cou
 
 Deze schone gegevens moeten vervolgens bewaard worden in de workflowsdb database.
 
-```{r merged files toevoegen aan database, warning=FALSE}
+```{r merged files toevoegen aan database, warning=FALSE, message=FALSE}
 # dataframes opslaan als .csv
 write.csv(merged_flu, file = paste0(mapnaam, "merged_flu.csv"))
 write.csv(merged_dengue, file = paste0(mapnaam, "merged_dengue.csv"))
@@ -220,3 +223,54 @@ dbWriteTable(con, "merged_flu_rds", read.csv("~/HU_ILC_DS2/Datascience2_portfoli
 dbWriteTable(con, "merged_dengue_rds", read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/merged_dengue.rds"), overwrite = TRUE)
 
 ```
+
+Aan de hand van de schone gegevens is een merged tabel gemaakt aan de hand van de volgende code. 
+
+**doe sql**
+
+Deze data is gëexporteerd naar de "data" map en heet "merged_csv_202306051720.csv" deze kan nu worden ingelezen in R om statistische tests mee te doen. 
+
+```{r inlezen merged_csv en statistische tests, warning=FALSE, message=FALSE}
+# inlezen van de data
+merged_data <- read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/merged_csv_202306051720.csv")
+
+# toon beschrijvende statistieken
+summary(merged_data)
+
+# infant mortality geplot tegen de regio in het jaar 2005
+filtered_data <- subset(merged_data, year == 2005)
+
+ggplot(data = filtered_data, aes(x = region, y = infant_mortality, fill = region)) +
+  geom_bar(stat = "identity") +
+  xlab("Region") +
+  ylab("Infant Mortality") +
+  ggtitle("Infant Mortality per regio in 2005")
+
+# infant mortality per regio 
+# Groepeer de dataset op jaar en regio en bereken het gemiddelde van infant mortality
+average_infant_mortality <- merged_data %>%
+  group_by(year, region) %>%
+  summarise(mean_infant_mortality = mean(infant_mortality))
+
+# Plot de gemiddelde infant mortality per jaar per regio
+ggplot(data = average_infant_mortality, aes(x = year, y = mean_infant_mortality, color = region)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "Gemiddelde Infant Mortality per jaar per regio",
+       x = "Year",
+       y = "Gemiddelde Infant Mortality") +
+  theme_minimal()
+
+# bereken het gemiddelde van life_expectancy per region
+mean_life_expectancy <- aggregate(life_expectancy ~ region, data = merged_data, FUN = mean)
+
+# maak  barplot
+ggplot(data = mean_life_expectancy, aes(x = region, y = life_expectancy, fill = region)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Region", y = "Mean Life Expectancy") +
+  ggtitle("Gemiddelde Levensverwachting per Regio") +
+  theme_minimal()
+
+```
+
+
