@@ -154,9 +154,29 @@ dbWriteTable(con, "gapminder_data_rds", readRDS("~/HU_ILC_DS2/Datascience2_portf
 
 ```
 
-De tabellen zijn nu ingeladen in dbever. De volgende stap is om de inhoud van de tabellen in dbever te inspecteren aan de hand van SQL. 
+De tabellen zijn nu ingeladen in dbever. De volgende stap is om de inhoud van de tabellen in dbever te inspecteren aan de hand van SQL. De code in ce chunk hieronder is niet gerund, deze is in dbeaver gerund. het gevormde sql file is te vinden in mijn [Github]() repository. 
 
-*doe sql*
+
+```{sql sql1, eval=FALSE}
+-- Inspecteer de inhoud van de flu_data_csv-tabel
+SELECT * FROM flu_data_csv;
+
+-- Inspecteer de inhoud van de dengue_data_csv-tabel
+SELECT * FROM dengue_data_csv;
+
+-- Inspecteer de inhoud van de gapminder_data_csv-tabel
+SELECT * FROM gapminder_data_csv;
+
+-- Inspecteer de inhoud van de flu_data_rds-tabel
+SELECT * FROM flu_data_rds;
+
+-- Inspecteer de inhoud van de dengue_data_rds-tabel
+SELECT * FROM dengue_data_rds;
+
+-- Inspecteer de inhoud van de gapminder_data_rds-tabel
+SELECT * FROM gapminder_data_rds;
+
+```
 
 We gaan ook de tabellen inspecteren met R aan de hand van dplyr. 
 
@@ -222,7 +242,26 @@ dbWriteTable(con, "merged_dengue_rds", read.csv("~/HU_ILC_DS2/Datascience2_portf
 
 Aan de hand van de schone gegevens is een merged tabel gemaakt aan de hand van de volgende code. 
 
-**doe sql**
+```{sql sql2, eval=FALSE}
+
+--- Merge rds data
+SELECT *
+INTO merged_rds
+FROM merged_flu_rds
+UNION ALL
+SELECT *
+FROM merged_dengue_rds;
+
+
+--- Merge csv data
+SELECT *
+INTO merged_csv
+FROM merged_flu_csv
+UNION ALL
+SELECT *
+FROM merged_dengue_csv;
+
+```
 
 Deze data is gëexporteerd naar de "data" map en heet "merged_csv_202306051720.csv" deze kan nu worden ingelezen in R om statistische tests mee te doen. 
 
