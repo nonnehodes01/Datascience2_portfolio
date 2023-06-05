@@ -4,16 +4,106 @@ author: "Nonne Hodes"
 date: "`r Sys.Date()`"
 output: html_document
 ---
+```{r inlezen libraries}
+install.packages("dslabs")
+library(dslabs)
+library(tidyverse)
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r librarys, message=FALSE, echo=FALSE}
 ```
 
 __opdracht 7:__ 
 _Relationele databases (SQL/database- vaardigheden)_
-```{r formatieve opdracht les 7}
+
+We beginnen met het inlezen van de data en deze tidy maken. 
+
+```{r data laden en tidy maken}
+# inlezen van de flu data
+flu_data <- read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/flu_data_portfolio_opdracht_7.csv")
+
+# tidy maken van de flu data
+flu_data_tidy <- flu_data %>%
+  pivot_longer(cols = c("Argentina", "Australia", "Austria", "Belgium", "Bolivia", "Brazil", "Bulgaria", "Canada", "Chile", "France", "Germany", "Hungary", "Japan", "Mexico", "Netherlands", "New.Zealand", "Norway", "Paraguay", "Peru", "Poland", "Romania", "Russia", "South.Africa", "Spain", "Sweden", "Switzerland", "Ukraine", "United.States", "Uruguay"), 
+               names_to = "country",
+               values_to = "value")
+
+# maak er een dataframe van
+flu_data_tidy_df <- as.data.frame(flu_data_tidy)
+
+
+# inlezen van de dengue data
+dengue_data <- read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/dengue_data_portfolio_opdracht_7.csv")
+
+# tidy maken can de dengue data
+dengue_data_tidy <- dengue_data %>%
+  pivot_longer(cols = c("Argentina", "Bolivia", "Brazil", "India", "Indonesia", "Mexico", "Philippines", "Singapore", "Thailand", "Venezuela"), 
+               names_to = "country",
+               values_to = "value")
+
+# maak er een dataframe van 
+dengue_data_tidy_df <- as.data.frame(dengue_data_tidy)
+
+
+# inlezen van de gapminder data
+gapminder_data <- dslabs::gapminder
+
+# maak er een dataframe van
+gapminder_data_df <- as.data.frame(gapminder_data)
 
 ```
+
+Nu de dataframes gemaakt zijn kunnen de klassen gecontrolleerd worden. 
+
+```{r klasse uitzoeken en aanpassen}
+# onderzoeken wat de classes zijn
+class(flu_data_tidy_df)
+class(dengue_data_tidy_df)
+class(gapminder_data_df)
+```
+
+De classes komen overeen. Nu kan er uitgezocht worden wat de gegevenstype zijn, deze kunnen zo nodig aangepast worden. 
+
+```{r gegevenstype uitzoeken en aanpassen}
+#uitzoeken of de gegevenstypen over een komen
+str(flu_data_tidy_df[c("country", "Date")])
+str(dengue_data_tidy_df[c("country", "Date")])
+
+```
+
+De gegevenstypen komen overeen, maar in de gapminder data is de "Date" geen datum, maar alleen een jaar in de kolom "Year". om dit op te lossen wordt er aand de flue en dengue data een extra kolom met "year" toegevoegd.
+
+```{r gegevenstype uitzoeken en aanpassen 2}
+flu_data_tidy_df_2 <- flu_data_tidy_df %>%
+  mutate(year = year(ymd(Date)))
+
+dengue_data_tidy_df_2 <- dengue_data_tidy_df %>%
+  mutate(year = year(ymd(Date)))
+
+# nogmaals checken of de gegevenstypen overeen komen 
+str(flu_data_tidy_df_2[c("country", "year")])
+str(dengue_data_tidy_df_2[c("country", "year")])
+str(gapminder_data_df[c("country", "year")])
+```
+
+De gegevenstypen komen niet overeen. De kolommen "country" en "year"zijn in de gapminder dataframe van de gegevenstypes "Factor with leves" en "integer", deze zijn in de flue en dengue data van de gegevenstypes "character" en "number". dit moet worden opgelost. 
+
+```{r gegevenstype uitzoeken en aanpassen 3}
+# gegevenstypen aanpassen
+flu_data_tidy_df_2$country <- as.factor(flu_data_tidy_df_2$country)
+flu_data_tidy_df_2$year <- as.integer(flu_data_tidy_df_2$year)
+
+dengue_data_tidy_df_2$country <- as.factor(dengue_data_tidy_df_2$country)
+dengue_data_tidy_df_2$year <- as.integer(dengue_data_tidy_df_2$year)
+
+# nogmaals gegevenstypen nakijken
+str(flu_data_tidy_df_2[c("country", "year")])
+str(dengue_data_tidy_df_2[c("country", "year")])
+str(gapminder_data_df[c("country", "year")])
+
+```
+
+Nu de gegevenstypen overeen komen kunnen de dataframes opgeslagen worden als .csv en .rds bestanden. 
+
+```{r opslaan van de dataframes}
+
+```
+
