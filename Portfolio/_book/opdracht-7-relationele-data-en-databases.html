@@ -178,9 +178,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="opdracht-7-relationele-data-en-databases" class="section level1 hasAnchor">
 <h1>Opdracht 7: Relationele data en databases<a href="opdracht-7-relationele-data-en-databases.html#opdracht-7-relationele-data-en-databases" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>opdracht 7:</strong>
-<em>Relationele databases (SQL/database- vaardigheden)</em></p>
-<p>We beginnen met het inlezen van de data en deze tidy maken.</p>
+<p>In deze opdracht is er gewerkt met SQL. Er waren verschillende datasets beschikbaar die bewerkt moesten worden met SQL, ik heb dit gedaan aan de hand van dbeaver. DBeaver is een databaseclient voor het beheren en queryen van databases.De datasets moesten worden opgechoond en opgeslagen als csv en rds bestanden. tot slot moest er bij de opdracht een kort verslag geschreven worden, die zal beginnen vanaf het kopje “inleiding” als je verder leest.</p>
+<p><strong>inleiding</strong></p>
+<p>In dit verslag wordt een samenvatting gegeven van een data-analyse en visualisatie opdracht. deze opdracht is uitgevoerd met behulp van R (in rStudio) en PostgreSQl (in dbeaver). in deze opdracht werden er verschillende datasets verkend, opgeschoond en geanalyseert. De datasetst hadden gegevens met betrekking tot griep, dengue en demografische indicatoren van verschillende landen en jaren.</p>
+<p><strong>Data laden en opschonen</strong></p>
+<p>Voor deze opdracht zijn er verschillende datasets geladen; “flu_data.csv”, “dengue_data.csv” en “gapminder” uit het {dslabs} pakket. Deze datasets zijn in losse dataframes geladen en tidy gemaakt.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="opdracht-7-relationele-data-en-databases.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inlezen van de flu data</span></span>
 <span id="cb1-2"><a href="opdracht-7-relationele-data-en-databases.html#cb1-2" aria-hidden="true" tabindex="-1"></a>flu_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/HU_ILC_DS2/Datascience2_portfolio/data/flu_data_portfolio_opdracht_7.csv&quot;</span>)</span>
 <span id="cb1-3"><a href="opdracht-7-relationele-data-en-databases.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -212,7 +214,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-29"><a href="opdracht-7-relationele-data-en-databases.html#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-30"><a href="opdracht-7-relationele-data-en-databases.html#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># maak er een dataframe van</span></span>
 <span id="cb1-31"><a href="opdracht-7-relationele-data-en-databases.html#cb1-31" aria-hidden="true" tabindex="-1"></a>gapminder_data_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(gapminder_data)</span></code></pre></div>
-<p>Nu de dataframes gemaakt zijn kunnen de klassen gecontrolleerd worden.</p>
+<p>Vervolgens zijn de klassen gecontrolleerd op dat ze wel echt dataframes zijn aan de hand van de volgende code.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="opdracht-7-relationele-data-en-databases.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># onderzoeken wat de classes zijn</span></span>
 <span id="cb2-2"><a href="opdracht-7-relationele-data-en-databases.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(flu_data_tidy_df)</span></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
@@ -220,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="opdracht-7-relationele-data-en-databases.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(gapminder_data_df)</span></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<p>De classes komen overeen. Nu kan er uitgezocht worden wat de gegevenstype zijn, deze kunnen zo nodig aangepast worden.</p>
+<p>Hieruit is geconcludeerd dat alle klassen overeen komen met elkaar, vervolgens is er onderzocht of de gegevenstypen ook overeen komen met elkaar, om zo nodig aan te kunnen passen.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="opdracht-7-relationele-data-en-databases.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#uitzoeken of de gegevenstypen over een komen</span></span>
 <span id="cb8-2"><a href="opdracht-7-relationele-data-en-databases.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(flu_data_tidy_df[<span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;Date&quot;</span>)])</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    19111 obs. of  2 variables:
@@ -230,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## &#39;data.frame&#39;:    6590 obs. of  2 variables:
 ##  $ country: chr  &quot;Argentina&quot; &quot;Bolivia&quot; &quot;Brazil&quot; &quot;India&quot; ...
 ##  $ Date   : chr  &quot;2002-12-29&quot; &quot;2002-12-29&quot; &quot;2002-12-29&quot; &quot;2002-12-29&quot; ...</code></pre>
-<p>De gegevenstypen komen overeen, maar in de gapminder data is de “Date” geen datum, maar alleen een jaar in de kolom “Year”. om dit op te lossen wordt er aand de flue en dengue data een extra kolom met “year” toegevoegd.</p>
+<p>De gegevenstypen komen overeen, maar in de gapminder data is de “Date” geen datum, maar alleen een jaar in de kolom “Year”. om dit op te lossen wordt er aan de flu en dengue data een extra kolom met “year” toegevoegd.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="opdracht-7-relationele-data-en-databases.html#cb12-1" aria-hidden="true" tabindex="-1"></a>flu_data_tidy_df_2 <span class="ot">&lt;-</span> flu_data_tidy_df <span class="sc">%&gt;%</span></span>
 <span id="cb12-2"><a href="opdracht-7-relationele-data-en-databases.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(<span class="fu">ymd</span>(Date)))</span>
 <span id="cb12-3"><a href="opdracht-7-relationele-data-en-databases.html#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -250,7 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## &#39;data.frame&#39;:    10545 obs. of  2 variables:
 ##  $ country: Factor w/ 185 levels &quot;Albania&quot;,&quot;Algeria&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ year   : int  1960 1960 1960 1960 1960 1960 1960 1960 1960 1960 ...</code></pre>
-<p>De gegevenstypen komen niet overeen. De kolommen “country” en “year”zijn in de gapminder dataframe van de gegevenstypes “Factor with leves” en “integer”, deze zijn in de flue en dengue data van de gegevenstypes “character” en “number”. dit moet worden opgelost.</p>
+<p>Hieruit blijkt dat de gegevenstypen niet overeen komen. De kolommen “country” en “year”zijn in de gapminder dataframe van de gegevenstypes “Factor with leves” en “integer”, deze zijn in de flue en dengue data van de gegevenstypes “character” en “number”. dit is opgelost aan de hand van de onderstaande code.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="opdracht-7-relationele-data-en-databases.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gegevenstypen aanpassen</span></span>
 <span id="cb18-2"><a href="opdracht-7-relationele-data-en-databases.html#cb18-2" aria-hidden="true" tabindex="-1"></a>flu_data_tidy_df_2<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(flu_data_tidy_df_2<span class="sc">$</span>country)</span>
 <span id="cb18-3"><a href="opdracht-7-relationele-data-en-databases.html#cb18-3" aria-hidden="true" tabindex="-1"></a>flu_data_tidy_df_2<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(flu_data_tidy_df_2<span class="sc">$</span>year)</span>
@@ -284,7 +286,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb24-10"><a href="opdracht-7-relationele-data-en-databases.html#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(flu_data_tidy_df_2, <span class="at">file =</span> <span class="fu">paste0</span>(mapnaam, <span class="st">&quot;flu_data_tidy.rds&quot;</span>))</span>
 <span id="cb24-11"><a href="opdracht-7-relationele-data-en-databases.html#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(dengue_data_tidy_df_2, <span class="at">file =</span> <span class="fu">paste0</span>(mapnaam, <span class="st">&quot;dengue_data_tidy.rds&quot;</span>))</span>
 <span id="cb24-12"><a href="opdracht-7-relationele-data-en-databases.html#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(gapminder_data_df, <span class="at">file =</span> <span class="fu">paste0</span>(mapnaam, <span class="st">&quot;gapminder_data_tidy.rds&quot;</span>))</span></code></pre></div>
-<p>Eerst wordt er verbinding gemaakt met de database.</p>
+<p><strong>Database creatie en gegevens importeren</strong></p>
+<p>Om de verkregen gegevens in te kunnen laden naar een database moet de PostgreSQL database eerst gemaakt worden, dit is gedaan aan de hand van dbeaver. de gemaak</p>
+<p>nadat de database genaamd “workflowsdb aangemaakt is moest er een connectie aangemaakt worden.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="opdracht-7-relationele-data-en-databases.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#verbinding maken met database</span></span>
 <span id="cb25-2"><a href="opdracht-7-relationele-data-en-databases.html#cb25-2" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(RPostgres<span class="sc">::</span><span class="fu">Postgres</span>(),</span>
 <span id="cb25-3"><a href="opdracht-7-relationele-data-en-databases.html#cb25-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span>,</span>
@@ -292,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb25-5"><a href="opdracht-7-relationele-data-en-databases.html#cb25-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dbname =</span> <span class="st">&quot;workflowsdb&quot;</span>,</span>
 <span id="cb25-6"><a href="opdracht-7-relationele-data-en-databases.html#cb25-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">user =</span> <span class="st">&quot;postgres&quot;</span>,</span>
 <span id="cb25-7"><a href="opdracht-7-relationele-data-en-databases.html#cb25-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">password =</span> <span class="st">&quot;Muis1234&quot;</span>)</span></code></pre></div>
-<p>Nu kunnen de tabellen ingevoegd worden in de postgreSQL database “workflowsdb”</p>
+<p>Nu de connectie bestaat kunnen de tabellen ingevoegd worden in de database.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="opdracht-7-relationele-data-en-databases.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#tabellen maken en invoegen CSV</span></span>
 <span id="cb26-2"><a href="opdracht-7-relationele-data-en-databases.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;flu_data_csv&quot;</span>, <span class="fu">read.csv</span>(<span class="st">&quot;~/HU_ILC_DS2/Datascience2_portfolio/data/flu_data_tidy.csv&quot;</span>), <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb26-3"><a href="opdracht-7-relationele-data-en-databases.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;dengue_data_csv&quot;</span>, <span class="fu">read.csv</span>(<span class="st">&quot;~/HU_ILC_DS2/Datascience2_portfolio/data/dengue_data_tidy.csv&quot;</span>), <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
@@ -321,7 +325,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb27-15"><a href="opdracht-7-relationele-data-en-databases.html#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-16"><a href="opdracht-7-relationele-data-en-databases.html#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="co">-- Inspecteer de inhoud van de gapminder_data_rds-tabel</span></span>
 <span id="cb27-17"><a href="opdracht-7-relationele-data-en-databases.html#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> gapminder_data_rds;</span></code></pre></div>
-<p>We gaan ook de tabellen inspecteren met R aan de hand van dplyr.</p>
+<p>De tabellen zin ook geïnspecteerd met R aan de hand van dplyr.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="opdracht-7-relationele-data-en-databases.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inlezen van de data</span></span>
 <span id="cb28-2"><a href="opdracht-7-relationele-data-en-databases.html#cb28-2" aria-hidden="true" tabindex="-1"></a>flu_data_csv <span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;~/HU_ILC_DS2/Datascience2_portfolio/data/flu_data_tidy.csv&quot;</span>)</span>
 <span id="cb28-3"><a href="opdracht-7-relationele-data-en-databases.html#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -400,7 +404,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4      54681           NA  Americas       Caribbean
 ## 5   20619075 108322326649  Americas   South America
 ## 6    1867396           NA      Asia    Western Asia</code></pre>
-<p>Nu moeten de gegevens van de gapminder toegevoegd worden aan de dengue en flu.</p>
+<p>Nadat de gegevens geïnspecteerd zijn moeten de gegevens van de gapminder toegevoegd worden aan de dengue en flu.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="opdracht-7-relationele-data-en-databases.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Samenvoegen van gapminder_data_df met flu_data_tidy_df_2 op basis van country en year</span></span>
 <span id="cb40-2"><a href="opdracht-7-relationele-data-en-databases.html#cb40-2" aria-hidden="true" tabindex="-1"></a>merged_flu <span class="ot">&lt;-</span> <span class="fu">left_join</span>(flu_data_tidy_df_2, gapminder_data_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;year&quot;</span>))</span>
 <span id="cb40-3"><a href="opdracht-7-relationele-data-en-databases.html#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -442,6 +446,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb42-16"><a href="opdracht-7-relationele-data-en-databases.html#cb42-16" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb42-17"><a href="opdracht-7-relationele-data-en-databases.html#cb42-17" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> merged_dengue_csv;</span></code></pre></div>
 <p>Deze data is gëexporteerd naar de “data” map en heet “merged_csv_202306051720.csv” deze kan nu worden ingelezen in R om statistische tests mee te doen.</p>
+<p><strong>Beschrijvende statistieken en visualisaties</strong></p>
+<p>Mer de gekoppelde tabel kunnen er verschillende beschrijvende statistieken weergeven worden om inzicht te krijgen in de gegevens. dit is als volgt gedaan.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="opdracht-7-relationele-data-en-databases.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inlezen van de data</span></span>
 <span id="cb43-2"><a href="opdracht-7-relationele-data-en-databases.html#cb43-2" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/HU_ILC_DS2/Datascience2_portfolio/data/merged_csv_202306051720.csv&quot;</span>)</span>
 <span id="cb43-3"><a href="opdracht-7-relationele-data-en-databases.html#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -471,6 +477,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  3rd Qu.:8.160e+07   3rd Qu.:6.371e+11                                        
 ##  Max.   :1.311e+09   Max.   :5.218e+12                                        
 ##  NA&#39;s   :1977        NA&#39;s   :8781</code></pre>
+<p>Daarnaast zijn er verschillende visualisaties gedaan, er is een bar plot gemaakt over infant mortality in de verschillende regios in 2005, er is een scatter/line plot gemaakt over de gemiddelde infant mortality per jaar per regio en er is een bar plot gemaakt bij de gemiddelde levensverwachting per regio. de resultaten hiervan zijn hieronder terug te zien.</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="opdracht-7-relationele-data-en-databases.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># infant mortality geplot tegen de regio in het jaar 2005</span></span>
 <span id="cb45-2"><a href="opdracht-7-relationele-data-en-databases.html#cb45-2" aria-hidden="true" tabindex="-1"></a>filtered_data <span class="ot">&lt;-</span> <span class="fu">subset</span>(merged_data, year <span class="sc">==</span> <span class="dv">2005</span>)</span>
 <span id="cb45-3"><a href="opdracht-7-relationele-data-en-databases.html#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -479,7 +486,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb45-6"><a href="opdracht-7-relationele-data-en-databases.html#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Region&quot;</span>) <span class="sc">+</span></span>
 <span id="cb45-7"><a href="opdracht-7-relationele-data-en-databases.html#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Infant Mortality&quot;</span>) <span class="sc">+</span></span>
 <span id="cb45-8"><a href="opdracht-7-relationele-data-en-databases.html#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Infant Mortality per regio in 2005&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/inlezen%20merged_csv%20en%20statistische%20tests-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/visualisatie-1.png" width="672" /></p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="opdracht-7-relationele-data-en-databases.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># infant mortality per regio </span></span>
 <span id="cb46-2"><a href="opdracht-7-relationele-data-en-databases.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Groepeer de dataset op jaar en regio en bereken het gemiddelde van infant mortality</span></span>
 <span id="cb46-3"><a href="opdracht-7-relationele-data-en-databases.html#cb46-3" aria-hidden="true" tabindex="-1"></a>average_infant_mortality <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
@@ -494,7 +501,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb46-12"><a href="opdracht-7-relationele-data-en-databases.html#cb46-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
 <span id="cb46-13"><a href="opdracht-7-relationele-data-en-databases.html#cb46-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Gemiddelde Infant Mortality&quot;</span>) <span class="sc">+</span></span>
 <span id="cb46-14"><a href="opdracht-7-relationele-data-en-databases.html#cb46-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/inlezen%20merged_csv%20en%20statistische%20tests-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/visualisatie-2.png" width="672" /></p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="opdracht-7-relationele-data-en-databases.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bereken het gemiddelde van life_expectancy per region</span></span>
 <span id="cb47-2"><a href="opdracht-7-relationele-data-en-databases.html#cb47-2" aria-hidden="true" tabindex="-1"></a>mean_life_expectancy <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(life_expectancy <span class="sc">~</span> region, <span class="at">data =</span> merged_data, <span class="at">FUN =</span> mean)</span>
 <span id="cb47-3"><a href="opdracht-7-relationele-data-en-databases.html#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -504,7 +511,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb47-7"><a href="opdracht-7-relationele-data-en-databases.html#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Region&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Mean Life Expectancy&quot;</span>) <span class="sc">+</span></span>
 <span id="cb47-8"><a href="opdracht-7-relationele-data-en-databases.html#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Gemiddelde Levensverwachting per Regio&quot;</span>) <span class="sc">+</span></span>
 <span id="cb47-9"><a href="opdracht-7-relationele-data-en-databases.html#cb47-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/inlezen%20merged_csv%20en%20statistische%20tests-3.png" width="672" /></p>
+<p><img src="_main_files/figure-html/visualisatie-3.png" width="672" /></p>
+<p><strong>Conclusie</strong>
+Deze opdracht weergeeft mijn vaardigheden op het gebied van gegevensanalyse en visualisatie met behulp van R en SQL. Ik heb ervaring opgedaan met het opschonen en combineren van gegevens, het uitvoeren van analyses met SQL en dplyr, en het creëren van informatieve visualisaties.</p>
 
 </div>
             </section>

@@ -1,5 +1,11 @@
 # Opdracht 7: Relationele data en databases
 
+In deze opdracht is er gewerkt met SQL. Er waren verschillende datasets beschikbaar die bewerkt moesten worden met SQL, ik heb dit gedaan aan de hand van dbeaver. DBeaver is een databaseclient voor het beheren en queryen van databases.De datasets moesten worden opgechoond en opgeslagen als csv en rds bestanden. tot slot moest er bij de opdracht een kort verslag geschreven worden, die zal beginnen vanaf het kopje "inleiding" als je verder leest. 
+
+__Inleiding__
+
+In dit verslag wordt een samenvatting gegeven van een data-analyse en visualisatie opdracht. deze opdracht is uitgevoerd met behulp van R (in rStudio) en PostgreSQl (in dbeaver). in deze opdracht werden er verschillende datasets verkend, opgeschoond en geanalyseert. De datasetst hadden gegevens met betrekking tot griep, dengue en demografische indicatoren van verschillende landen en jaren.
+
 ```{r inlezen libraries, warning=FALSE, include=FALSE}
 #install.packages("dslabs")
 #install.packages('RPostgreSQL')
@@ -16,10 +22,9 @@ library(ggplot2)
 
 ```
 
-__opdracht 7:__ 
-_Relationele databases (SQL/database- vaardigheden)_
+__Data laden en opschonen__ 
 
-We beginnen met het inlezen van de data en deze tidy maken. 
+Voor deze opdracht zijn er verschillende datasets geladen; "flu_data.csv", "dengue_data.csv" en "gapminder" uit het {dslabs} pakket. Deze datasets zijn in losse dataframes geladen en tidy gemaakt. 
 
 ```{r data laden en tidy maken, warning=FALSE, message=FALSE}
 # inlezen van de flu data
@@ -56,7 +61,7 @@ gapminder_data_df <- as.data.frame(gapminder_data)
 
 ```
 
-Nu de dataframes gemaakt zijn kunnen de klassen gecontrolleerd worden. 
+Vervolgens zijn de klassen gecontrolleerd op dat ze wel echt dataframes zijn aan de hand van de volgende code. 
 
 ```{r klasse uitzoeken en aanpassen, warning=FALSE}
 # onderzoeken wat de classes zijn
@@ -65,8 +70,7 @@ class(dengue_data_tidy_df)
 class(gapminder_data_df)
 ```
 
-De classes komen overeen. Nu kan er uitgezocht worden wat de gegevenstype zijn, deze kunnen zo nodig aangepast worden. 
-
+Hieruit is geconcludeerd dat alle klassen overeen komen met elkaar, vervolgens is er onderzocht of de gegevenstypen ook overeen komen met elkaar, om zo nodig aan te kunnen passen. 
 ```{r gegevenstype uitzoeken en aanpassen, warning=FALSE, message=FALSE}
 #uitzoeken of de gegevenstypen over een komen
 str(flu_data_tidy_df[c("country", "Date")])
@@ -74,7 +78,7 @@ str(dengue_data_tidy_df[c("country", "Date")])
 
 ```
 
-De gegevenstypen komen overeen, maar in de gapminder data is de "Date" geen datum, maar alleen een jaar in de kolom "Year". om dit op te lossen wordt er aand de flue en dengue data een extra kolom met "year" toegevoegd.
+De gegevenstypen komen overeen, maar in de gapminder data is de "Date" geen datum, maar alleen een jaar in de kolom "Year". om dit op te lossen wordt er aan de flu en dengue data een extra kolom met "year" toegevoegd.
 
 ```{r gegevenstype uitzoeken en aanpassen 2, warning=FALSE}
 flu_data_tidy_df_2 <- flu_data_tidy_df %>%
@@ -89,7 +93,7 @@ str(dengue_data_tidy_df_2[c("country", "year")])
 str(gapminder_data_df[c("country", "year")])
 ```
 
-De gegevenstypen komen niet overeen. De kolommen "country" en "year"zijn in de gapminder dataframe van de gegevenstypes "Factor with leves" en "integer", deze zijn in de flue en dengue data van de gegevenstypes "character" en "number". dit moet worden opgelost. 
+Hieruit blijkt dat de gegevenstypen niet overeen komen. De kolommen "country" en "year"zijn in de gapminder dataframe van de gegevenstypes "Factor with leves" en "integer", deze zijn in de flue en dengue data van de gegevenstypes "character" en "number". dit is opgelost aan de hand van de onderstaande code. 
 
 ```{r gegevenstype uitzoeken en aanpassen 3, warning=FALSE}
 # gegevenstypen aanpassen
@@ -124,7 +128,11 @@ saveRDS(gapminder_data_df, file = paste0(mapnaam, "gapminder_data_tidy.rds"))
 
 ```
 
-Eerst wordt er verbinding gemaakt met de database.
+__Database creatie en gegevens importeren__
+
+Om de verkregen gegevens in te kunnen laden naar een database moet de PostgreSQL database eerst gemaakt worden, dit is gedaan aan de hand van dbeaver. de gemaak
+
+nadat de database genaamd "workflowsdb aangemaakt is moest er een connectie aangemaakt worden. 
 
 ```{r connectie maken, warning=FALSE, message=FALSE}
 #verbinding maken met database
@@ -137,7 +145,7 @@ con <- dbConnect(RPostgres::Postgres(),
 
 ```
 
-Nu kunnen de tabellen ingevoegd worden in de postgreSQL database "workflowsdb"
+Nu de connectie bestaat kunnen de tabellen ingevoegd worden in de database. 
 
 ```{r invoegen van tabellen, warning=FALSE, message=FALSE}
 
@@ -178,7 +186,7 @@ SELECT * FROM gapminder_data_rds;
 
 ```
 
-We gaan ook de tabellen inspecteren met R aan de hand van dplyr. 
+De tabellen zin ook geïnspecteerd met R aan de hand van dplyr. 
 
 ```{r tabellen inspecteren, warning=FALSE}
 # inlezen van de data
@@ -206,7 +214,7 @@ head(gapminder_data_rds)
 
 ``` 
 
-Nu moeten de gegevens van de gapminder toegevoegd worden aan de dengue en flu.
+Nadat de gegevens geïnspecteerd zijn moeten de gegevens van de gapminder toegevoegd worden aan de dengue en flu.
 
 ```{r gapminder toevoegen aan dengue en flu, warning=FALSE, message=FALSE}
 
@@ -266,13 +274,21 @@ FROM merged_dengue_csv;
 
 Deze data is gëexporteerd naar de "data" map en heet "merged_csv_202306051720.csv" deze kan nu worden ingelezen in R om statistische tests mee te doen. 
 
-```{r inlezen merged_csv en statistische tests, warning=FALSE, message=FALSE}
+__Beschrijvende statistieken en visualisaties__
+
+Mer de gekoppelde tabel kunnen er verschillende beschrijvende statistieken weergeven worden om inzicht te krijgen in de gegevens. dit is als volgt gedaan.
+
+```{r inlezen merged_csv, warning=FALSE, message=FALSE}
 # inlezen van de data
 merged_data <- read.csv("~/HU_ILC_DS2/Datascience2_portfolio/data/merged_csv_202306051720.csv")
 
 # toon beschrijvende statistieken
 summary(merged_data)
+```
 
+Daarnaast zijn er verschillende visualisaties gedaan, er is een bar plot gemaakt over infant mortality in de verschillende regios in 2005, er is een scatter/line plot gemaakt  over de gemiddelde infant mortality per jaar per regio en er is een bar plot gemaakt bij de gemiddelde levensverwachting per regio. de resultaten hiervan zijn hieronder terug te zien. 
+
+```{r visualisatie, warning=FALSE, message=FALSE}
 # infant mortality geplot tegen de regio in het jaar 2005
 filtered_data <- subset(merged_data, year == 2005)
 
@@ -308,3 +324,7 @@ ggplot(data = mean_life_expectancy, aes(x = region, y = life_expectancy, fill = 
   theme_minimal()
 
 ```
+
+__Conclusie__
+
+Deze opdracht weergeeft mijn vaardigheden op het gebied van gegevensanalyse en visualisatie met behulp van R en SQL. Ik heb ervaring opgedaan met het opschonen en combineren van gegevens, het uitvoeren van analyses met SQL en dplyr, en het creëren van informatieve visualisaties. 
