@@ -4,4 +4,12 @@
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-<iframe src="dir_tree.pdf" width="100%" height="800px"></iframe>
+Bij deze opdracht moest hetGuerrilla-analyseraamwerk toegepast worden op verschillende mappen, namelijk de daur2 map, de projecticum map en de workflows map. Het is belangrijk om voor de data-mappen alleen een readme.txt-bestand te plaatsen met alle benodigde informatie en waar de data worden opgeslagen. 
+
+Ik ben begonnen met de daur2 map, wegens omstandigheden kon ik deze niet exproteren naar mijn laptop, vandaar dat ik het heb opgeschoond in de HU werkomgeving. de resultaten hiervan zijn de vinden in afbeelding 1. de bijbehorende readme is te vinden op mijn [github repository voor daur2]() die ik heb aangemaakt om de afbeeldingen en readme in te plaatsen op een duidelijke plek. 
+
+<iframe src="dir_tree_daur_2.pdf" width="100%" height="800px"></iframe>
+
+Vervolgens ben ik verder gegaan met het opschonen van de mappen voor het projecticum, de resultaten hiervan zijn terug te zien in afbeelding 2. de bijbehorende readme is te vinden in de [github repository voor het projecticum](https://github.com/nonnehodes01/project_genexpressie). 
+
+Tot slot heb ik de mappen voor workflows opgeschoond, de resultaten hiervan zijn terug te vinden in afbeelding 3. de bijbehorende read me is terug te vinden in de [github repository voor het workflows portfolio](https://github.com/nonnehodes01/Datascience2_portfolio). 
