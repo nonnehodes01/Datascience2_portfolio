@@ -1,0 +1,144 @@
+---
+site: bookdown::bookdown_site
+documentclass: book
+output:
+  bookdown::gitbook:
+    number_sections: no
+bibliography: Zotero_bibliography.bib
+params:
+  country: "Austria"
+  year: 2020
+  period: "3-11"
+---
+
+# Portfolio
+
+Placeholder
+
+
+
+<!--chapter:end:index.Rmd-->
+
+
+# Opdracht 1: Reproduceerbaar onderzoek
+
+Placeholder
+
+
+## 1.1: C. elegans plaatexperiment
+## 1.2: Open science
+### Deel 1: Open collegiale toetsing
+### Deel 2: reproduceerbaarheid van artikelen gepubliceerd onder het open databeleid
+
+<!--chapter:end:001_Portfolio_opdracht_1_1.Rmd-->
+
+# Opdracht 2: Gegevensbeheer
+
+```{r setup2, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Bij deze opdracht moest hetGuerrilla-analyseraamwerk toegepast worden op verschillende mappen, namelijk de daur2 map, de projecticum map en de workflows map. Het is belangrijk om voor de data-mappen alleen een readme.txt-bestand te plaatsen met alle benodigde informatie en waar de data worden opgeslagen. 
+
+Ik ben begonnen met de daur2 map, wegens omstandigheden kon ik deze niet exproteren naar mijn laptop, vandaar dat ik het heb opgeschoond in de HU werkomgeving. de resultaten hiervan zijn de vinden in afbeelding 1. de bijbehorende readme is te vinden op mijn [github repository voor daur2]() die ik heb aangemaakt om de afbeeldingen en readme in te plaatsen op een duidelijke plek. 
+
+```{r afbeelding 1}
+knitr::include_graphics("~/HU_ILC_DS2/Datascience2_portfolio/Portfolio_opgeschoond_eindversie/portfolio_opdracht_2/dir_tree_daur_2.png")
+
+```
+Afbeelding 1: Directory tree bij de daur 2 mappen
+
+Vervolgens ben ik verder gegaan met het opschonen van de mappen voor het projecticum, de resultaten hiervan zijn terug te zien in afbeelding 2. de bijbehorende readme is te vinden in de [github repository voor het projecticum](https://github.com/nonnehodes01/project_genexpressie). 
+
+```{r afbeelding 2}
+knitr::include_graphics("~/HU_ILC_DS2/Datascience2_portfolio/Portfolio_opgeschoond_eindversie/portfolio_opdracht_2/dir_tree_projecticum.png")
+```
+Afbeelding 2: Directory tree bij de projecticum mappen
+
+Tot slot heb ik de mappen voor workflows opgeschoond, de resultaten hiervan zijn terug te vinden in afbeelding 3. de bijbehorende read me is terug te vinden in de [github repository voor het workflows portfolio](https://github.com/nonnehodes01/Datascience2_portfolio). 
+
+```{r afbeelding 2}
+knitr::include_graphics("~/HU_ILC_DS2/Datascience2_portfolio/Portfolio_opgeschoond_eindversie/portfolio_opdracht_2/dir_tree_workflows.png")
+```
+Afbeelding 3: Directory tree bij de workflows portfolio mappen
+
+
+<!--chapter:end:003_Portfolio_opdracht_2_Nonne_Hodes_1756864.Rmd-->
+
+
+# Opdracht 3: Gebruik van Git en Github
+
+Placeholder
+
+
+## 3.1: CV
+## 3.1: Een nieuwe vaardigheid
+
+<!--chapter:end:004_Portfolio_opdracht_3_1_CV.Rmd-->
+
+
+# Opdracht 5: Gebruik van Zotero
+
+Placeholder
+
+
+
+<!--chapter:end:005_Portfolio_opdracht_5_Nonne_Hodes.Rmd-->
+
+# Opdracht 6: Output pages
+
+In deze opdracht was het doel om een GitHub Pages-repository op te zetten voor dit portfolio. Eerst moest er een nieuwe repo aangemaakt worden op github met een geschikte naam, in mijn geval is dit "nonnehodes01/portfolio". De repository is [hier](https://github.com/nonnehodes01/Portfolio) te vinden. Vervolgens werd de repository naar je lokale machine gecloned, waarna alle html bestanden die met bookdown zijn gemaakt naar de gekloonde repository gepusht werden. Na het committen en pushen van de wijzigingen naar het GitHub Pages-repository, wordt de website automatisch bijgewerkt en gehost op GitHub Pages.
+
+De URL naar mijn website is; https://nonnehodes01.github.io/Portfolio/
+
+Maar je kan er ook snel komen door [hier](https://nonnehodes01.github.io/Portfolio/) te klikken.
+
+<!--chapter:end:006_Portfolio_opdracht_6_Nonne_Hodes_1756864.Rmd-->
+
+
+# Opdracht 7: Relationele data en databases
+
+Placeholder
+
+
+
+<!--chapter:end:007_Portfolio_opdracht_7_Nonne_Hodes_1756864.Rmd-->
+
+# Opdracht 8: Een R package bouwen
+
+Deze portfolio-opdracht richt zich op het creëren van een R-pakket met behulp van RMarkdown-bestanden. Het doel is om duplicatie van code aan te pakken door functies te schrijven en deze code naar een nieuw R-pakket te verplaatsen. Daarnaast moet het pakket een correct opgemaakt DESCRIPTION-bestand, functies met de juiste documentatie, een NAMESPACE-bestand, een opgeschoonde dataset en een vignet bevatten.
+
+In dit project heb ik het R-pakket "makeLifeEasy" gecreëerd, dat verschillende handige functies bevat om taken te vereenvoudigen en codeherhaling te verminderen. de schone data en code is te vinden in de github repository [makeLifeEasy](https://github.com/nonnehodes01/makeLifeEasy.git). De volledige code (niet opgeschoond en met losse functies) is te vinden in de github repository [Dataschience2_portfolio - portfolio_opdracht_8](https://github.com/nonnehodes01/Datascience2_portfolio/tree/main/portfolio_opdracht_8) Het pakket is ontworpen om het gemakkelijker te maken om gegevens te verwerken, analyses uit te voeren en visuele resultaten te genereren. 
+
+Hoewel het eigenlijk de bedoeling was om stukken gedupliceerde code hierin te verwerken viel mij al snel op dat ik (waarschijnlijk omdat ik niet niet extreem veel geprogrammeerd heb) niet heel veel gedupliceerde code heb. het enige wat wel opviel was dat de libraries laden en het maken van summaries bijna altijd terug komt, daarom heb ik dit wel in de package verwerkt. voor de overige functies heb ik gekozen voor dingen die mij veel hadden kunnen helpen met het extra oefenen voor de vakken ab en daur1. hiervoor heb ik verschillende functies geschreven; een functie geschreven die lijsten kan maken met random woorden, een functie die lijsten kan maken met random getallen en een functie die makkelijk de typing van een kolom in een tibble kan aanpassen. hieronder volgt een kleine uitleg per functie;
+
+- Funtie 1: "load_common_libraries()": Deze functie laadt vaak gebruikte R-pakketten, zoals dplyr en ggplot2, om snel aan de slag te kunnen met gegevensverwerking en visualisatie.
+
+- Functie 2: "generate_random_numbers()": Deze functie genereert een willekeurig getal binnen een opgegeven bereik. Het is handig bij het simuleren van gegevens of het maken van willekeurige selecties.
+
+- Functie 3: "generate_random_words()": Deze functie selecteert willekeurig een woord uit een opgegeven lijst van woorden. Het kan worden gebruikt voor het genereren van testgegevens of het maken van willekeurige tekstfragmenten.
+
+- Functie 4: "change_column_category()": Deze functie past de categorie van een opgegeven kolom in een tibble aan naar de opgegeven nieuwe categorie. Het is handig bij het wijzigen van de gegevenstypen van kolommen in een dataset, zoals het omzetten van numerieke waarden naar categorieën.
+
+- Functie 5: "simple_summary()": Deze functie biedt een aangepaste samenvatting van een tibble met behulp van opgegeven groepering en kolommen. Het maakt het gemakkelijk om specifieke statistieken te berekenen en overzichten te genereren.
+
+De package is makkelijk te installeren door de volgende code uit te voeren;
+
+```r
+devtools::install_github("nonnehodes01/makeLifeEasy")
+
+```
+
+<!--chapter:end:008_Portfolio_opdracht_8_Nonne_Hodes_1756864.Rmd-->
+
+
+# Opdracht 9: RMarkdown parameters
+
+Placeholder
+
+
+## 9.1: COVID-19-rapport zonder parametrisering
+## 9.2: COVID-19-rapport met parametrisering
+
+<!--chapter:end:009_Portfolio_opdracht_9_Nonne_Hodes_1756864.Rmd-->
+
