@@ -9,7 +9,7 @@ Bij deze opdracht moest hetGuerrilla-analyseraamwerk toegepast worden op verschi
 Ik ben begonnen met de daur2 map, wegens omstandigheden kon ik deze niet exproteren naar mijn laptop, vandaar dat ik het heb opgeschoond in de HU werkomgeving. de resultaten hiervan zijn de vinden in afbeelding 1. de bijbehorende readme is te vinden op mijn [github repository voor daur2]() die ik heb aangemaakt om de afbeeldingen en readme in te plaatsen op een duidelijke plek. 
 
 ```{r afbeelding 1, echo=FALSE, results='asis'}
-knitr::include_graphics("~/HU_ILC_DS2/Datascience2_portfolio/Portfolio_opgeschoond_eindversie/portfolio_opdracht_2/dir_tree_daur_2.png")
+knitr::include_graphics("~/HU_ILC_DS2/Datascience2_portfolio/Portfolio_opgeschoond_eindversie/portfolio_opdracht_2/dir_tree.png")
 
 ```
 

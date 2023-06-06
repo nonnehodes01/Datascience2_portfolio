@@ -121,28 +121,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 </head>
 
@@ -170,16 +148,16 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="opdracht-3-gebruik-van-git-en-github.html"><a href="opdracht-3-gebruik-van-git-en-github.html"><i class="fa fa-check"></i>Opdracht 3: Gebruik van Git en Github</a>
 <ul>
 <li class="chapter" data-level="" data-path="opdracht-3-gebruik-van-git-en-github.html"><a href="opdracht-3-gebruik-van-git-en-github.html#cv"><i class="fa fa-check"></i>3.1: CV</a></li>
-<li class="chapter" data-level="" data-path="opdracht-3-gebruik-van-git-en-github.html"><a href="opdracht-3-gebruik-van-git-en-github.html#een-blik-in-de-toekomst"><i class="fa fa-check"></i>3.1: Een blik in de toekomst</a></li>
+<li class="chapter" data-level="" data-path="opdracht-3-gebruik-van-git-en-github.html"><a href="opdracht-3-gebruik-van-git-en-github.html#een-nieuwe-vaardigheid"><i class="fa fa-check"></i>3.1: Een nieuwe vaardigheid</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="opdracht-5-gebruik-van-zotero.html"><a href="opdracht-5-gebruik-van-zotero.html"><i class="fa fa-check"></i>Opdracht 5: Gebruik van Zotero</a></li>
 <li class="chapter" data-level="" data-path="opdracht-6-output-pages.html"><a href="opdracht-6-output-pages.html"><i class="fa fa-check"></i>Opdracht 6: Output pages</a></li>
 <li class="chapter" data-level="" data-path="opdracht-7-relationele-data-en-databases.html"><a href="opdracht-7-relationele-data-en-databases.html"><i class="fa fa-check"></i>Opdracht 7: Relationele data en databases</a></li>
 <li class="chapter" data-level="" data-path="opdracht-8-een-r-package-bouwen.html"><a href="opdracht-8-een-r-package-bouwen.html"><i class="fa fa-check"></i>Opdracht 8: Een R package bouwen</a></li>
-<li class="chapter" data-level="" data-path="opdracht-9-rmarkdown-parameters-presentations.html"><a href="opdracht-9-rmarkdown-parameters-presentations.html"><i class="fa fa-check"></i>Opdracht 9: RMarkdown parameters &amp; presentations</a>
+<li class="chapter" data-level="" data-path="opdracht-9-rmarkdown-parameters.html"><a href="opdracht-9-rmarkdown-parameters.html"><i class="fa fa-check"></i>Opdracht 9: RMarkdown parameters</a>
 <ul>
-<li class="chapter" data-level="" data-path="opdracht-9-rmarkdown-parameters-presentations.html"><a href="opdracht-9-rmarkdown-parameters-presentations.html#covid-19-rapport-zonder-parametrisering"><i class="fa fa-check"></i>9.1: COVID-19-rapport zonder parametrisering</a></li>
-<li class="chapter" data-level="" data-path="opdracht-9-rmarkdown-parameters-presentations.html"><a href="opdracht-9-rmarkdown-parameters-presentations.html#covid-19-rapport-met-parametrisering"><i class="fa fa-check"></i>9.2: COVID-19-rapport met parametrisering</a></li>
+<li class="chapter" data-level="" data-path="opdracht-9-rmarkdown-parameters.html"><a href="opdracht-9-rmarkdown-parameters.html#covid-19-rapport-zonder-parametrisering"><i class="fa fa-check"></i>9.1: COVID-19-rapport zonder parametrisering</a></li>
+<li class="chapter" data-level="" data-path="opdracht-9-rmarkdown-parameters.html"><a href="opdracht-9-rmarkdown-parameters.html#covid-19-rapport-met-parametrisering"><i class="fa fa-check"></i>9.2: COVID-19-rapport met parametrisering</a></li>
 </ul></li>
 </ul>
 
@@ -329,8 +307,7 @@ div.csl-indent {
 <span id="cb7-20"><a href="opdracht-1-reproduceerbaar-onderzoek.html#cb7-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;normalised raw data&quot;</span>,</span>
 <span id="cb7-21"><a href="opdracht-1-reproduceerbaar-onderzoek.html#cb7-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;log10 transformation&quot;</span>) <span class="sc">+</span></span>
 <span id="cb7-22"><a href="opdracht-1-reproduceerbaar-onderzoek.html#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<pre><code>## Warning: Removed 6 rows containing missing
-## values (`geom_point()`).</code></pre>
+<pre><code>## Warning: Removed 6 rows containing missing values (`geom_point()`).</code></pre>
 <p><img src="_main_files/figure-html/normaliseren-1.png" width="672" /></p>
 <ol start="11" style="list-style-type: lower-alpha">
 <li>omdat het normaliseren van de data er voor zorgt dat de schaal van de gegevens wordt gestandaardiseerd, hierdoor is het makkelijker om data met verschillende variabelen te vergelijken en combineren. Ook voorkomt het de invloed van hele grote getallen, we werken met waardes tussen de 0 en 100, dit op een kleineere schaal in beeld brengen is handiger dan op die grootte.</li>
