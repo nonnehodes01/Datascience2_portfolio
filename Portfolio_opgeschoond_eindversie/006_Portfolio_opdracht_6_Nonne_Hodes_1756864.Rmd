@@ -1,1 +1,7 @@
 # Opdracht 6: Output pages
+
+In deze opdracht was het doel om een GitHub Pages-repository op te zetten voor dit portfolio. Eerst moest er een nieuwe repo aangemaakt worden op github met een geschikte naam, in mijn geval is dit "nonnehodes01/portfolio". De repository is [hier](https://github.com/nonnehodes01/Portfolio) te vinden. Vervolgens werd de repository naar je lokale machine gecloned, waarna alle html bestanden die met bookdown zijn gemaakt naar de gekloonde repository gepusht werden. Na het committen en pushen van de wijzigingen naar het GitHub Pages-repository, wordt de website automatisch bijgewerkt en gehost op GitHub Pages.
+
+De URL naar mijn website is; https://nonnehodes01.github.io/Portfolio/
+
+Maar je kan er ook snel komen door [hier](https://nonnehodes01.github.io/Portfolio/) te klikken.
